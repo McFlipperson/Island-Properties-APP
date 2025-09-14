@@ -1,0 +1,49 @@
+Build comprehensive Proxy-Cheap API integration for expert authenticity with proper error handling and monitoring:
+
+1. Proxy-Cheap API Integration:
+   - Complete API client with authentication and rate limiting
+   - Core functions: create proxy, delete proxy, get status, test connection, usage stats, IP geolocation
+   - Philippines-specific endpoint configuration (Manila/Cebu residential IPs)
+   - Robust error handling for API failures, timeouts, and invalid responses
+   - Store credentials in Replit Secrets: PROXY_CHEAP_API_KEY, PROXY_CHEAP_BASE_URL
+
+2. Expert-Proxy Assignment System:
+   - Database schema: proxy_cheap_id, proxy_ip, proxy_port, proxy_location, proxy_credentials_encrypted, assignment_status, created_at, last_health_check
+   - Assignment workflow: validate budget → request proxy → verify location → test connection → activate
+   - Status management: "unassigned", "requesting", "testing", "active", "failed", "maintenance"
+   - Automatic proxy release and cleanup when expert deleted
+   - Budget enforcement (reject if >5 proxies or >$6.35/month)
+
+3. Comprehensive Monitoring System:
+   - Scheduled health checks every 20 minutes per proxy
+   - IP reputation validation (residential vs datacenter detection)
+   - Connection speed and reliability metrics
+   - Geographic verification (ensure Philippines location accuracy)
+   - Usage tracking and bandwidth monitoring
+   - Alert system for proxy failures or reputation issues
+
+4. Security & Data Protection:
+   - AES-256-GCM encryption for proxy credentials per expert
+   - Secure credential storage with expert-specific encryption keys
+   - Connection details isolation (no cross-expert credential access)
+   - Audit logging for all proxy operations
+   - Environment variable validation and secure configuration
+
+5. Cost Management & Optimization:
+   - Real-time cost tracking per proxy and total monthly spend
+   - Budget alerts at 80% and 100% of $6.35 limit
+   - Automatic cost projection and usage forecasting
+   - Proxy utilization metrics to optimize assignments
+   - Monthly reporting and cost breakdown per expert
+
+6. Integration Foundation:
+   - Browser session configuration data export for future automation
+   - Expert switching context preparation with proxy details
+   - Connection testing utilities for platform access validation
+   - Ready for Playwright browser isolation integration
+
+CRITICAL REQUIREMENTS: 
+- All operations must handle failures gracefully with user feedback
+- Budget constraints must be enforced automatically
+- Philippines location validation is mandatory for all proxies
+- Complete audit trail for debugging and compliance

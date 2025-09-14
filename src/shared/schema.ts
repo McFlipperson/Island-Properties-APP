@@ -161,28 +161,66 @@ export const proxyAssignments = pgTable('proxy_assignments', {
   id: uuid('id').defaultRandom().primaryKey(),
   personaId: uuid('persona_id').references(() => expertPersonas.id, { onDelete: 'cascade' }).unique(),
   
-  // Proxy Configuration
+  // Proxy-Cheap Integration
+  proxyCheapId: varchar('proxy_cheap_id', { length: 100 }),
   proxyProvider: varchar('proxy_provider', { length: 50 }).default('proxy-cheap'),
   proxyType: varchar('proxy_type', { length: 20 }).default('residential'),
   proxyLocation: varchar('proxy_location', { length: 50 }).notNull(),
   
-  // Connection Details (Encrypted)
-  proxyHostEncrypted: text('proxy_host_encrypted').notNull(),
-  proxyPortEncrypted: text('proxy_port_encrypted').notNull(),
-  proxyUsernameEncrypted: text('proxy_username_encrypted').notNull(),
-  proxyPasswordEncrypted: text('proxy_password_encrypted').notNull(),
+  // Assignment Workflow Status
+  assignmentStatus: varchar('assignment_status', { length: 20 }).default('unassigned'), // unassigned, requesting, testing, active, failed, maintenance
   
-  // Proxy Status
-  proxyStatus: varchar('proxy_status', { length: 20 }).default('active'),
+  // Connection Details (Encrypted)
+  proxyHostEncrypted: text('proxy_host_encrypted'),
+  proxyPortEncrypted: text('proxy_port_encrypted'),
+  proxyUsernameEncrypted: text('proxy_username_encrypted'),
+  proxyPasswordEncrypted: text('proxy_password_encrypted'),
+  proxyCredentialsEncrypted: text('proxy_credentials_encrypted'), // Full credentials JSON encrypted
+  
+  // Geographic Validation (Philippines Focus)
+  detectedCountry: varchar('detected_country', { length: 3 }), // ISO country code
+  detectedCity: varchar('detected_city', { length: 100 }),
+  detectedRegion: varchar('detected_region', { length: 100 }),
+  isPhilippinesVerified: boolean('is_philippines_verified').default(false),
+  geoValidationLastCheck: timestamp('geo_validation_last_check'),
+  
+  // IP Reputation & Security
+  ipReputationScore: decimal('ip_reputation_score', { precision: 3, scale: 2 }),
+  isResidentialVerified: boolean('is_residential_verified').default(false),
+  blacklistCheckStatus: varchar('blacklist_check_status', { length: 20 }), // clean, flagged, unknown
+  lastReputationCheck: timestamp('last_reputation_check'),
+  
+  // Health Monitoring
+  proxyStatus: varchar('proxy_status', { length: 20 }).default('inactive'), // inactive, active, failed, maintenance
   lastHealthCheck: timestamp('last_health_check'),
-  healthCheckStatus: varchar('health_check_status', { length: 20 }),
+  healthCheckStatus: varchar('health_check_status', { length: 20 }), // healthy, degraded, failed
+  consecutiveFailures: integer('consecutive_failures').default(0),
   
   // Performance Metrics
   connectionSuccessRate: decimal('connection_success_rate', { precision: 5, scale: 2 }).default('0.00'),
   averageResponseTime: integer('average_response_time'),
+  bandwidthUsageMb: decimal('bandwidth_usage_mb', { precision: 10, scale: 2 }).default('0.00'),
+  totalRequests: integer('total_requests').default(0),
+  failedRequests: integer('failed_requests').default(0),
+  
+  // Cost Management
+  monthlyCostUsd: decimal('monthly_cost_usd', { precision: 6, scale: 2 }),
+  dailyCostUsd: decimal('daily_cost_usd', { precision: 6, scale: 2 }),
+  projectedMonthlyCost: decimal('projected_monthly_cost', { precision: 6, scale: 2 }),
+  costTrackingStartDate: timestamp('cost_tracking_start_date'),
+  lastCostUpdate: timestamp('last_cost_update'),
+  
+  // Security & Encryption
+  encryptionKeyId: varchar('encryption_key_id', { length: 255 }),
+  
+  // Audit Trail
+  assignmentReason: text('assignment_reason'),
+  lastStatusChange: timestamp('last_status_change'),
+  statusChangeReason: text('status_change_reason'),
   
   // Metadata
-  assignedAt: timestamp('assigned_at').defaultNow(),
+  assignedAt: timestamp('assigned_at'),
+  activatedAt: timestamp('activated_at'),
   createdAt: timestamp('created_at').defaultNow(),
   updatedAt: timestamp('updated_at').defaultNow()
 });
