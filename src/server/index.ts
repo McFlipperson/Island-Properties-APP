@@ -6,7 +6,7 @@ import path from 'path';
 import { expertPersonasRouter } from './routes/expertPersonas';
 import { geoPlatformAccountsRouter } from './routes/geoPlatformAccounts';
 import { authorityContentRouter } from './routes/authorityContent';
-import { webhooksRouter } from './routes/webhooks';
+// import { webhooksRouter } from './routes/webhooks'; // Temporarily disabled
 import { errorHandler } from './middleware/errorHandler';
 import { captureRawBody } from './middleware/twilioSignatureValidation';
 import { logger } from './services/logger';
@@ -91,7 +91,7 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/api/expert-personas', expertPersonasRouter);
 app.use('/api/geo-platform-accounts', geoPlatformAccountsRouter);
 app.use('/api/authority-content', authorityContentRouter);
-app.use('/api/webhooks', webhooksRouter);
+// // app.use('/api/webhooks', webhooksRouter); // Temporarily disabled // Temporarily disabled
 
 // Error handling
 app.use(errorHandler);
