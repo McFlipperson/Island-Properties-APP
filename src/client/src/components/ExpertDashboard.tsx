@@ -18,6 +18,7 @@ export function ExpertDashboard() {
     filters,
     setFilters,
     createExpert,
+    updateExpert,
     deleteExpert,
   } = useExpertPersonas();
   
@@ -29,6 +30,8 @@ export function ExpertDashboard() {
   } = useExpertSessions();
 
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editingExpert, setEditingExpert] = useState<ExpertPersona | null>(null);
   const [showSessionPanel, setShowSessionPanel] = useState(false);
   const [showExportPanel, setShowExportPanel] = useState(false);
 
@@ -43,14 +46,27 @@ export function ExpertDashboard() {
     }
   };
 
+  const handleEditExpert = async (expertData: ExpertPersonaFormData) => {
+    try {
+      if (!editingExpert) return;
+      
+      await updateExpert(editingExpert.id, expertData);
+      setShowEditModal(false);
+      setEditingExpert(null);
+    } catch (err) {
+      console.error('Failed to update expert:', err);
+      throw err;
+    }
+  };
+
   const handleExpertAction = async (action: string, expert: ExpertPersona) => {
     switch (action) {
       case 'activate':
         await switchSession(expert.id);
         break;
       case 'edit':
-        // TODO: Implement edit modal
-        console.log('Edit expert:', expert.id);
+        setEditingExpert(expert);
+        setShowEditModal(true);
         break;
       case 'delete':
         if (window.confirm(`Delete expert "${expert.expertName}"? This action cannot be undone.`)) {
@@ -182,6 +198,18 @@ export function ExpertDashboard() {
         <ExpertCreationModal
           onClose={() => setShowCreateModal(false)}
           onCreateExpert={handleCreateExpert}
+        />
+      )}
+
+      {showEditModal && editingExpert && (
+        <ExpertCreationModal
+          onClose={() => {
+            setShowEditModal(false);
+            setEditingExpert(null);
+          }}
+          onCreateExpert={handleEditExpert}
+          editMode={true}
+          initialData={editingExpert}
         />
       )}
 

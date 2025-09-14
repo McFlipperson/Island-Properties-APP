@@ -4,48 +4,78 @@ import { ExpertPersonaFormData, ExpertiseFocus, AuthorityLevel } from '../types/
 interface ExpertCreationModalProps {
   onClose: () => void;
   onCreateExpert: (expertData: ExpertPersonaFormData) => Promise<void>;
+  editMode?: boolean;
+  initialData?: any;
 }
 
-export function ExpertCreationModal({ onClose, onCreateExpert }: ExpertCreationModalProps) {
+export function ExpertCreationModal({ onClose, onCreateExpert, editMode = false, initialData }: ExpertCreationModalProps) {
   const [currentStep, setCurrentStep] = useState(1);
   const [creating, setCreating] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const [formData, setFormData] = useState<ExpertPersonaFormData>({
-    expertName: '',
-    expertiseFocus: 'Manila Urban Property Expert',
-    targetBuyerSegments: [],
-    authorityLevel: 'emerging',
-    primaryMarketLocation: '',
-    secondaryMarketAreas: [],
-    professionalBackground: '',
-    expertiseCredentials: '',
-    marketExperience: '',
-    geoContentSpecializations: [],
-    authorityBuildingTopics: [],
-    citationWorthyExpertise: [],
-    platformExpertiseFocus: {
-      medium: { active: false, contentTypes: [] },
-      reddit: { active: false, subreddits: [] },
-      quora: { active: false, topics: [] },
-    },
-    contentPublicationSchedule: {
-      frequency: 'weekly',
-      timezone: 'Asia/Manila',
-    },
-    expertVoiceCharacteristics: {
-      tone: 'professional',
-      expertise_level: 'intermediate',
-      target_audience: 'all',
-    },
-    browserFingerprintConfig: {
-      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-      viewport: {
-        width: 1920,
-        height: 1080,
+  const getInitialFormData = (): ExpertPersonaFormData => {
+    const defaultData = {
+      expertName: '',
+      expertiseFocus: 'Manila Urban Property Expert' as ExpertiseFocus,
+      targetBuyerSegments: [],
+      authorityLevel: 'emerging' as AuthorityLevel,
+      primaryMarketLocation: '',
+      secondaryMarketAreas: [],
+      professionalBackground: '',
+      expertiseCredentials: '',
+      marketExperience: '',
+      geoContentSpecializations: [],
+      authorityBuildingTopics: [],
+      citationWorthyExpertise: [],
+      platformExpertiseFocus: {
+        medium: { active: false, contentTypes: [] },
+        reddit: { active: false, subreddits: [] },
+        quora: { active: false, topics: [] },
       },
-    },
-  });
+      contentPublicationSchedule: {
+        frequency: 'weekly' as const,
+        timezone: 'Asia/Manila',
+      },
+      expertVoiceCharacteristics: {
+        tone: 'professional' as const,
+        expertise_level: 'intermediate' as const,
+        target_audience: 'all' as const,
+      },
+      browserFingerprintConfig: {
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        viewport: {
+          width: 1920,
+          height: 1080,
+        },
+      },
+    };
+
+    if (editMode && initialData) {
+      return {
+        ...defaultData,
+        expertName: initialData.expertName || '',
+        expertiseFocus: initialData.expertiseFocus || defaultData.expertiseFocus,
+        targetBuyerSegments: initialData.targetBuyerSegments || [],
+        authorityLevel: initialData.authorityLevel || defaultData.authorityLevel,
+        primaryMarketLocation: initialData.primaryMarketLocation || '',
+        secondaryMarketAreas: initialData.secondaryMarketAreas || [],
+        professionalBackground: initialData.professionalBackground || '',
+        expertiseCredentials: initialData.expertiseCredentials || '',
+        marketExperience: initialData.marketExperience || '',
+        geoContentSpecializations: initialData.geoContentSpecializations || [],
+        authorityBuildingTopics: initialData.authorityBuildingTopics || [],
+        citationWorthyExpertise: initialData.citationWorthyExpertise || [],
+        platformExpertiseFocus: initialData.platformExpertiseFocus || defaultData.platformExpertiseFocus,
+        contentPublicationSchedule: initialData.contentPublicationSchedule || defaultData.contentPublicationSchedule,
+        expertVoiceCharacteristics: initialData.expertVoiceCharacteristics || defaultData.expertVoiceCharacteristics,
+        browserFingerprintConfig: initialData.browserFingerprintConfig || defaultData.browserFingerprintConfig,
+      };
+    }
+
+    return defaultData;
+  };
+
+  const [formData, setFormData] = useState<ExpertPersonaFormData>(getInitialFormData());
 
   const expertiseFocusOptions: ExpertiseFocus[] = [
     'Manila Urban Property Expert',
@@ -156,7 +186,7 @@ export function ExpertCreationModal({ onClose, onCreateExpert }: ExpertCreationM
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
           <div>
-            <h2 className="text-xl font-semibold text-gray-900">Create Expert Persona</h2>
+            <h2 className="text-xl font-semibold text-gray-900">{editMode ? 'Edit Expert Persona' : 'Create Expert Persona'}</h2>
             <div className="flex items-center gap-2 mt-2">
               {[1, 2, 3, 4].map(step => (
                 <div
@@ -695,7 +725,7 @@ export function ExpertCreationModal({ onClose, onCreateExpert }: ExpertCreationM
                       : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                   }`}
                 >
-                  {creating ? 'Creating...' : 'Create Expert'}
+                  {creating ? (editMode ? 'Updating...' : 'Creating...') : (editMode ? 'Update Expert' : 'Create Expert')}
                 </button>
               )}
             </div>
