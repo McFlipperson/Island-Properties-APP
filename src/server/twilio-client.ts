@@ -135,7 +135,7 @@ export class TwilioSMSClient {
     
     logger.info('🔧 Twilio SMS client initialized', {
       accountSid: this.config.accountSid.substring(0, 10) + '...',
-      phoneNumber: this.config.phoneNumber
+      phoneNumber: this.config.phoneNumber.substring(0, 4) + '***' + this.config.phoneNumber.slice(-4)
     });
   }
 
@@ -236,7 +236,7 @@ export class TwilioSMSClient {
 
       logger.info('✅ Philippines phone number provisioned successfully', {
         expertId: request.expertId,
-        phoneNumber: purchasedNumber.phoneNumber,
+        phoneNumber: purchasedNumber.phoneNumber.substring(0, 4) + '***' + purchasedNumber.phoneNumber.slice(-4),
         phoneNumberId: phoneNumberRecord[0].id
       });
 
@@ -319,7 +319,7 @@ export class TwilioSMSClient {
         sessionId: session[0].id,
         expertId: request.expertId,
         platformType: request.platformType,
-        phoneNumber: phoneNumber[0].twilioPhoneNumber
+        phoneNumber: phoneNumber[0].twilioPhoneNumber.substring(0, 4) + '***' + phoneNumber[0].twilioPhoneNumber.slice(-4)
       });
 
       return {
@@ -354,9 +354,9 @@ export class TwilioSMSClient {
   async processSMSWebhook(webhookData: WebhookSMSEvent): Promise<VerificationCodeResult | null> {
     try {
       logger.info('📨 Processing incoming SMS webhook', {
-        messageSid: webhookData.MessageSid,
-        from: webhookData.From,
-        to: webhookData.To
+        messageSid: webhookData.MessageSid.substring(0, 10) + '...',
+        fromNumber: webhookData.From.substring(0, 4) + '***' + webhookData.From.slice(-4),
+        toNumber: webhookData.To.substring(0, 4) + '***' + webhookData.To.slice(-4)
       });
 
       // Find phone number record
@@ -367,7 +367,9 @@ export class TwilioSMSClient {
         .limit(1);
 
       if (phoneNumber.length === 0) {
-        logger.warn('⚠️ SMS received for unknown phone number', { phoneNumber: webhookData.To });
+        logger.warn('⚠️ SMS received for unknown phone number', { 
+          phoneNumber: webhookData.To.substring(0, 4) + '***' + webhookData.To.slice(-4) 
+        });
         return null;
       }
 
@@ -420,9 +422,10 @@ export class TwilioSMSClient {
           .where(eq(smsMessages.id, smsMessage[0].id));
 
         logger.info('🎯 Verification code extracted successfully', {
-          code: verificationCode.verificationCode,
+          codeLength: verificationCode.verificationCode.length,
           codeType: verificationCode.codeType,
-          platform: verificationCode.platformType
+          platform: verificationCode.platformType,
+          codePattern: verificationCode.verificationCode.replace(/\d/g, 'X').replace(/[A-Z]/g, 'Y')
         });
 
         return verificationCode;
@@ -439,14 +442,16 @@ export class TwilioSMSClient {
         .where(eq(smsMessages.id, smsMessage[0].id));
 
       logger.info('ℹ️ SMS processed but no verification code found', {
-        messageBody: webhookData.Body.substring(0, 50) + '...'
+        messageLength: webhookData.Body.length,
+        hasNumbers: /\d/.test(webhookData.Body),
+        messagePattern: webhookData.Body.replace(/\d/g, 'X').replace(/[A-Za-z]/g, 'Y').substring(0, 20) + '...'
       });
 
       return null;
 
     } catch (error: any) {
       logger.error('❌ SMS webhook processing failed', { 
-        messageSid: webhookData.MessageSid, 
+        messageSid: webhookData.MessageSid.substring(0, 10) + '...', 
         error: error.message 
       });
       
