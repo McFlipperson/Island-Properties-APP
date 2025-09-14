@@ -1,0 +1,183 @@
+name: geo-expert-authority-app
+version: 1.0.0
+description: >
+  GEO-optimized expert authority lead generation system for Island Properties.
+  Philippines real estate experts create AI-citation-worthy comprehensive 
+  content that generates qualified consultation requests and referrals.
+  
+  Core Strategy: Expert content → AI engine citations → consultation requests → sales
+
+architecture:
+  approach: "Expert Authority Positioning for AI Engine Citation"
+  lead_generation: "Consultation-based referral funnel to Island Properties"
+  competitive_advantage: "Become the Philippines real estate expert AI engines cite"
+
+expert_specializations:
+  - name: "Philippines Market Analysis Expert"
+    focus: "Comprehensive market trends, investment opportunities, regulatory guidance"
+    target_audience: "International investors, OFW investors, professional relocators"
+    
+  - name: "Expat Property Guidance Expert"  
+    focus: "Foreign buyer legal requirements, cultural navigation, lifestyle integration"
+    target_audience: "Expat retirees, international professionals, lifestyle relocators"
+    
+  - name: "Manila Urban Property Expert"
+    focus: "Urban professional lifestyle, investment vs. lifestyle balance"
+    target_audience: "Manila professionals, career-driven relocators"
+    
+  - name: "Cebu Island Lifestyle Expert"
+    focus: "Island living, lifestyle investment, retirement planning"
+    target_audience: "Retirees, lifestyle seekers, digital nomads"
+    
+  - name: "Investment ROI Analysis Expert"
+    focus: "Property investment analysis, ROI calculations, market predictions"
+    target_audience: "Serious investors, portfolio diversifiers, wealth builders"
+
+geo_platform_strategy:
+  phase_1:
+    platform: "Medium"
+    priority: "Critical"
+    strategy: "Long-form authoritative articles (2000-4000 words)"
+    geo_value: "AI engines heavily cite Medium for comprehensive topics"
+    content_type: "Comprehensive guides, market analysis, expert insights"
+    timeline: "Immediate implementation"
+    
+  phase_2:
+    platform: "Reddit" 
+    priority: "Very High"
+    strategy: "Authentic community participation with expert advice"
+    geo_value: "AI engines reference Reddit discussions for real-world insights"
+    content_type: "Expert responses, market discussions, helpful guidance"
+    timeline: "2 weeks after Phase 1"
+    
+  phase_3:
+    platform: "Quora"
+    priority: "High" 
+    strategy: "Comprehensive expert answers to real estate questions"
+    geo_value: "Q&A format perfectly matches AI response patterns"
+    content_type: "Definitive answers, expert analysis, market guidance"
+    timeline: "1 month after Phase 2"
+    
+  phase_4:
+    platform: "Facebook"
+    priority: "Medium"
+    strategy: "Local Philippines market community building"
+    geo_value: "Low AI citation but valuable for audience development"
+    content_type: "Community engagement, local market presence"
+    timeline: "2 months after Phase 3"
+    
+  phase_5:
+    platform: "LinkedIn"
+    priority: "Medium"
+    strategy: "Professional credibility and B2B networking"
+    geo_value: "Medium professional content citation value"
+    content_type: "Thought leadership, professional networking"
+    timeline: "3 months after Phase 4"
+
+technical_architecture:
+  database: "PostgreSQL with expert content encryption and AI citation tracking"
+  proxy_service: "Proxy-Cheap residential IPs (5 dedicated IPs at $1.27/month each)"
+  browser_isolation: "Playwright with expert-specific fingerprint consistency"
+  content_optimization: "AI citation potential analysis and authority scoring"
+  lead_tracking: "Consultation request → Island Properties referral attribution"
+  
+  manual_support_layer:
+    approach: "Manual account creation with automated post-registration support"
+    registration_method: "User handles all platform registration and verification"
+    automation_scope: "Post-registration workflow automation and template preparation"
+    budget_impact: "No additional cost - uses existing $6.35/month infrastructure"
+    
+  account_management:
+    creation: "Manual registration by user"
+    verification: "Manual SMS/email verification by user" 
+    credential_storage: "Automated secure encryption and database storage"
+    workflow_automation: "Automated post-registration setup and template preparation"
+
+business_metrics:
+  primary_kpi: "Qualified consultation requests per month"
+  target_leads: "90-210 consultation requests monthly by month 6"
+  conversion_target: "40%+ consultation to Island Properties referral rate" 
+  roi_target: "Positive ROI by month 3, 300%+ ROI by month 12"
+  authority_target: "Top 3 Philippines real estate expert ranking"
+
+budget_analysis:
+  minimum_viable: "$6.35/month (proxies only, manual registration)"
+  recommended: "$46-86/month (proxies + cloud infrastructure, manual workflow)"
+  optimal: "$100-150/month (proxies + cloud + advanced manual workflow automation)"
+  manual_approach_benefit: "No additional costs for account creation - user handles registration"
+
+implementation_phases:
+  phase_1_foundation: "Weeks 1-6: Core expert system, manual account tracking, Medium integration"
+  phase_2_expansion: "Weeks 7-12: Post-registration automation, Reddit/Quora integration, workflow optimization" 
+  phase_3_optimization: "Weeks 13-18: Advanced templates, competitive intelligence, market leadership"
+
+# Add to budget_analysis:
+budget_analysis:
+  minimum_viable: "$6.35/month (proxies only, manual registration support)"
+  recommended: "$46-86/month (proxies + cloud infrastructure, manual workflow)"
+  optimal: "$100-150/month (proxies + cloud + advanced manual workflow automation)"
+  manual_approach_benefit: "No additional costs for account creation - user handles registration"
+
+# Add to business_metrics:
+automation_success_metrics:
+  account_creation_success: "95%+ automated registration success rate"
+  verification_speed: "Under 5 minutes for SMS verification"
+  cost_efficiency: "Account creation cost under $5 per platform per persona"
+  safety_maintenance: "Zero bans from automated registration process"
+
+# Update budget_analysis:
+budget_analysis:
+  minimum_viable: "$16.35/month (proxies + basic Twilio)"
+  recommended: "$56-96/month (proxies + cloud + Twilio PH numbers)"
+  optimal: "$110-160/month (full stack with automation layer)"
+  automation_addon: "+$10-15/month for Twilio PH numbers (5 personas)"
+
+business_metrics:
+  primary_kpi: "Qualified consultation requests per month"
+  target_leads: "90-210 consultation requests monthly by month 6"
+  conversion_target: "40%+ consultation to Island Properties referral rate" 
+  roi_target: "Positive ROI by month 3, 300%+ ROI by month 12"
+  authority_target: "Top 3 Philippines real estate expert ranking"
+
+budget_analysis:
+  minimum_viable: "$6.35/month (proxies only, local development)"
+  recommended: "$46-86/month (proxies + cloud infrastructure)"
+  optimal: "$100-150/month (proxies + cloud + advanced analytics)"
+  constraint_impact: "Lower budget = more manual processes, slower scaling"
+
+implementation_phases:
+  phase_1_foundation: "Weeks 1-6: Core expert system, Medium integration, basic analytics"
+  phase_2_expansion: "Weeks 7-12: Reddit/Quora integration, advanced tracking, 5-expert capacity" 
+  phase_3_optimization: "Weeks 13-18: Full platform integration, competitive intelligence, market leadership"
+
+success_criteria:
+  technical: "Zero account bans, 30-second expert switching, 99.9% uptime"
+  business: "Positive ROI by month 3, measurable AI citation growth, qualified lead generation"
+  competitive: "Recognized expert authority, displaced competitors, premium pricing capability"
+
+risk_mitigation:
+  content_quality: "Manual content creation with AI optimization assistance"
+  platform_safety: "Residential IP consistency, authentic expert positioning"
+  business_continuity: "Multiple platform presence, diverse lead sources"
+  competitive_advantage: "Authority building creates sustainable moat"
+
+docs:
+  - title: Expert Authority Definition System
+    path: docs/Expert-Authority-Definition-System.md
+    purpose: "Complete framework for Philippines real estate expert development"
+
+  - title: GEO Database Architecture
+    path: docs/GEO-Database-Architecture.md  
+    purpose: "Expert content, AI citation tracking, consultation management schema"
+
+  - title: Expert Proxy Infrastructure Guide
+    path: docs/Expert-Proxy-Infrastructure-Guide.md
+    purpose: "Proxy-Cheap integration for expert authenticity and consistency"
+
+  - title: GEO Platform Integration Strategy
+    path: docs/GEO-Platform-Integration-Strategy.md
+    purpose: "Medium/Reddit/Quora expert authority building implementation"
+
+  - title: Expert Authority System Overview  
+    path: docs/Expert-Authority-System-Overview.md
+    purpose: "Overall system architecture and expert management workflows"
