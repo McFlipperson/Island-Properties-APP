@@ -156,7 +156,12 @@ export function useExpertSessions() {
       session.expertId === expertId 
         ? {
             ...session,
-            proxyStatus: { ...session.proxyStatus, ...proxyStatus },
+            proxyStatus: { 
+              assigned: false,
+              status: 'inactive' as const,
+              ...session.proxyStatus, 
+              ...proxyStatus 
+            },
             lastActivity: new Date().toISOString(),
           }
         : session

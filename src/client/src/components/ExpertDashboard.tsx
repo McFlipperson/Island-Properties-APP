@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
-import { ExpertPersona, ExpertFilters, DashboardStats } from '../types/expert';
+import { useState } from 'react';
+import { ExpertPersona, ExpertPersonaFormData } from '../types/expert';
 import { useExpertPersonas } from '../hooks/useExpertPersonas';
 import { useExpertSessions } from '../hooks/useExpertSessions';
-import { ExpertGrid } from './ExpertGrid';
-import { ExpertCreationModal } from './ExpertCreationModal';
-import { ExpertStatsCards } from './ExpertStatsCards';
-import { ExpertFiltersBar } from './ExpertFiltersBar';
-import { SessionManagementPanel } from './SessionManagementPanel';
-import { ExportImportPanel } from './ExportImportPanel';
+import { ExpertGrid } from './ExpertGrid.tsx';
+import { ExpertCreationModal } from './ExpertCreationModal.tsx';
+import { ExpertStatsCards } from './ExpertStatsCards.tsx';
+import { ExpertFiltersBar } from './ExpertFiltersBar.tsx';
+import { SessionManagementPanel } from './SessionManagementPanel.tsx';
+import { ExportImportPanel } from './ExportImportPanel.tsx';
 
 export function ExpertDashboard() {
   const { 
@@ -18,7 +18,6 @@ export function ExpertDashboard() {
     filters,
     setFilters,
     createExpert,
-    updateExpert,
     deleteExpert,
   } = useExpertPersonas();
   
@@ -33,7 +32,7 @@ export function ExpertDashboard() {
   const [showSessionPanel, setShowSessionPanel] = useState(false);
   const [showExportPanel, setShowExportPanel] = useState(false);
 
-  const handleCreateExpert = async (expertData: any) => {
+  const handleCreateExpert = async (expertData: ExpertPersonaFormData) => {
     try {
       const newExpert = await createExpert(expertData);
       createSession(newExpert.id, newExpert.expertName);
@@ -189,7 +188,7 @@ export function ExpertDashboard() {
       {showSessionPanel && (
         <SessionManagementPanel
           sessions={sessions}
-          activeSession={activeSession}
+          activeSession={activeSession || null}
           onClose={() => setShowSessionPanel(false)}
           onSwitchSession={switchSession}
         />
