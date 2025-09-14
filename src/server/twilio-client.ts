@@ -5,6 +5,17 @@ import { getEncryptionService, EncryptedData } from './encryption-service';
 import { eq, and, desc, gt } from 'drizzle-orm';
 import winston from 'winston';
 
+// Import real-time dashboard delivery
+let deliverVerificationCodeToExpert: any = null;
+// Lazy import to avoid circular dependency
+async function loadDashboardDelivery() {
+  if (!deliverVerificationCodeToExpert) {
+    const dashboardModule = await import('./routes/dashboard');
+    deliverVerificationCodeToExpert = dashboardModule.deliverVerificationCodeToExpert;
+  }
+  return deliverVerificationCodeToExpert;
+}
+
 // Initialize logger
 const logger = winston.createLogger({
   level: 'info',
@@ -120,13 +131,42 @@ export class TwilioSMSClient {
   private static readonly ESTIMATED_MONTHLY_COST_PER_NUMBER = 1.00; // USD
   private static readonly TOTAL_MONTHLY_BUDGET = 15.00; // USD for Twilio
   
-  // Verification code patterns for different platforms
+  // Enhanced verification code patterns for full 4-8 digit + alphanumeric support
   private static readonly PLATFORM_CODE_PATTERNS = {
-    medium: /\b\d{6}\b/g,
-    reddit: /\b\d{6}\b/g,
-    quora: /\b\d{4,6}\b/g,
-    facebook: /\b\d{6}\b/g,
-    linkedin: /\b\d{6}\b/g
+    medium: [
+      /(?:verification code|verify|code)[\s:\-]*(\d{4,8})(?![0-9])/i,
+      /(?:verification code|verify|code)[\s:\-]*([A-Z0-9]{4,8})(?![A-Z0-9])/i,
+      /\b(\d{4,8})\b.*(?:code|verification|verify)/i
+    ],
+    reddit: [
+      /(?:verification code|verify|code)[\s:\-]*(\d{4,8})(?![0-9])/i,
+      /(?:verification code|verify|code)[\s:\-]*([A-Z0-9]{4,8})(?![A-Z0-9])/i,
+      /\b(\d{4,8})\b.*(?:code|verification|verify)/i
+    ],
+    quora: [
+      /(?:verification|verify|code)[\s:\-]*(\d{4,8})(?![0-9])/i,
+      /(?:verification|verify|code)[\s:\-]*([A-Z0-9]{4,8})(?![A-Z0-9])/i,
+      /\b(\d{4,8})\b.*(?:code|verification|verify)/i
+    ],
+    facebook: [
+      /(?:verification code|verify|code|FB)[\s:\-]*(\d{4,8})(?![0-9])/i,
+      /(?:verification code|verify|code|FB)[\s:\-]*([A-Z0-9]{4,8})(?![A-Z0-9])/i,
+      /\b(\d{4,8})\b.*(?:code|verification|verify)/i
+    ],
+    linkedin: [
+      /(?:verification code|verify|code|LinkedIn)[\s:\-]*(\d{4,8})(?![0-9])/i,
+      /(?:verification code|verify|code|LinkedIn)[\s:\-]*([A-Z0-9]{4,8})(?![A-Z0-9])/i,
+      /\b(\d{4,8})\b.*(?:code|verification|verify)/i
+    ],
+    // Enhanced generic fallback patterns with confidence scoring
+    generic: [
+      /(?:code|verification|verify)[\s:\-]*(\d{4,8})(?![0-9])/i,
+      /(?:code|verification|verify)[\s:\-]*([A-Z0-9]{4,8})(?![A-Z0-9])/i,
+      /your\s+(?:code|pin|otp)[\s:\-]*([A-Z0-9]{4,8})/i,
+      /authentication\s+code[\s:\-]*([A-Z0-9]{4,8})/i,
+      /\b(\d{4,8})\b.*(?:code|verification|verify)/i,
+      /verification.*?(\d{4,8})(?![0-9])/i
+    ]
   };
 
   constructor() {
@@ -373,16 +413,42 @@ export class TwilioSMSClient {
         return null;
       }
 
-      // Find active verification session
+      // Enhanced session lookup: Find active verification session with expert context
       const activeSession = await db
-        .select()
+        .select({
+          id: smsVerificationSessions.id,
+          personaId: smsVerificationSessions.personaId,
+          platformType: smsVerificationSessions.platformType,
+          platformAction: smsVerificationSessions.platformAction,
+          sessionStatus: smsVerificationSessions.sessionStatus,
+          expectedCodePattern: smsVerificationSessions.expectedCodePattern,
+          sessionExpiredAt: smsVerificationSessions.sessionExpiredAt,
+          attemptsRemaining: smsVerificationSessions.attemptsRemaining,
+          createdAt: smsVerificationSessions.createdAt
+        })
         .from(smsVerificationSessions)
         .where(and(
           eq(smsVerificationSessions.phoneNumberId, phoneNumber[0].id),
-          eq(smsVerificationSessions.sessionStatus, 'active')
+          eq(smsVerificationSessions.sessionStatus, 'active'),
+          gt(smsVerificationSessions.sessionExpiredAt, new Date()) // Not expired
         ))
         .orderBy(desc(smsVerificationSessions.createdAt))
         .limit(1);
+
+      // If no active session found, log for debugging
+      if (activeSession.length === 0) {
+        logger.warn('⚠️ No active verification session found for SMS', {
+          phoneNumber: webhookData.To.substring(0, 4) + '***' + webhookData.To.slice(-4),
+          messageSid: webhookData.MessageSid.substring(0, 10) + '...'
+        });
+      } else {
+        logger.info('✅ Found active verification session', {
+          sessionId: activeSession[0].id.substring(0, 8) + '...',
+          platformType: activeSession[0].platformType,
+          platformAction: activeSession[0].platformAction,
+          attemptsRemaining: activeSession[0].attemptsRemaining
+        });
+      }
 
       // Store SMS message
       const smsMessage = await db
@@ -400,10 +466,11 @@ export class TwilioSMSClient {
         })
         .returning();
 
-      // Extract verification code
+      // Extract verification code with proper session context
+      const sessionContext = activeSession.length > 0 ? activeSession[0] : null;
       const verificationCode = await this.extractVerificationCode(
         webhookData.Body,
-        activeSession.length > 0 ? activeSession[0] : null,
+        sessionContext,
         smsMessage[0]
       );
 
@@ -427,6 +494,27 @@ export class TwilioSMSClient {
           platform: verificationCode.platformType,
           codePattern: verificationCode.verificationCode.replace(/\d/g, 'X').replace(/[A-Z]/g, 'Y')
         });
+
+        // Real-time delivery to expert dashboard
+        if (sessionContext?.personaId) {
+          try {
+            const deliveryFunction = await loadDashboardDelivery();
+            await deliveryFunction(sessionContext.personaId, {
+              codeId: verificationCode.codeId,
+              verificationCode: verificationCode.verificationCode,
+              codeType: verificationCode.codeType,
+              platformType: verificationCode.platformType,
+              extractedAt: verificationCode.extractedAt,
+              expiresAt: verificationCode.expiresAt,
+              isValid: verificationCode.isValid
+            });
+          } catch (deliveryError: any) {
+            logger.warn('⚠️ Failed to deliver verification code to dashboard', {
+              expertId: sessionContext.personaId.substring(0, 8) + '...',
+              error: deliveryError.message
+            });
+          }
+        }
 
         return verificationCode;
       }
@@ -463,51 +551,78 @@ export class TwilioSMSClient {
   }
 
   /**
-   * Extract verification code from SMS message body
+   * Enhanced verification code extraction with platform-specific patterns and confidence scoring
    */
   private async extractVerificationCode(
     messageBody: string,
-    session: any,
+    session: any | null,
     smsMessage: any
   ): Promise<VerificationCodeResult | null> {
     try {
-      // Try different patterns for verification code extraction
-      const patterns = [
-        /\b\d{4,8}\b/g,  // 4-8 digit codes
-        /\b[A-Z0-9]{4,8}\b/g,  // Alphanumeric codes
-        /(?:code|verification|verify)[\s:]*([A-Z0-9]{4,8})/gi  // Context-aware extraction
-      ];
+      const platformType = session?.platformType || 'generic';
+      
+      // Get platform-specific patterns or fall back to generic
+      const platformPatterns = TwilioSMSClient.PLATFORM_CODE_PATTERNS[platformType as keyof typeof TwilioSMSClient.PLATFORM_CODE_PATTERNS] 
+        || TwilioSMSClient.PLATFORM_CODE_PATTERNS.generic;
 
-      let extractedCode: string | null = null;
-      let codeType = 'unknown';
-      let confidence = 0.5;
+      let bestMatch: { code: string; confidence: number; type: string; pattern: string } | null = null;
 
-      for (const pattern of patterns) {
-        const matches = messageBody.match(pattern);
-        if (matches && matches.length > 0) {
-          extractedCode = matches[0];
+      // Try platform-specific patterns first
+      for (let i = 0; i < platformPatterns.length; i++) {
+        const pattern = platformPatterns[i];
+        const match = messageBody.match(pattern);
+        
+        if (match && match[1]) {
+          const code = match[1].trim();
           
-          // Determine code type
-          if (/^\d+$/.test(extractedCode)) {
-            codeType = 'numeric';
-            confidence = 0.9;
-          } else if (/^[A-Z0-9]+$/.test(extractedCode)) {
-            codeType = 'alphanumeric';
-            confidence = 0.8;
-          } else {
-            codeType = 'mixed';
-            confidence = 0.7;
+          // Validate code length (4-8 characters)
+          if (code.length >= 4 && code.length <= 8) {
+            let confidence = 0.7 + (i === 0 ? 0.2 : 0.0); // Higher confidence for first pattern
+            let codeType = 'unknown';
+            
+            // Determine code type and adjust confidence
+            if (/^\d+$/.test(code)) {
+              codeType = 'numeric';
+              confidence += 0.1; // Numeric codes are more common
+            } else if (/^[A-Z0-9]+$/.test(code.toUpperCase())) {
+              codeType = 'alphanumeric';
+              confidence += 0.05;
+            } else if (/^[a-zA-Z0-9]+$/.test(code)) {
+              codeType = 'mixed_case';
+              confidence += 0.03;
+            }
+            
+            // Context-based confidence boost
+            if (messageBody.toLowerCase().includes('verification') || 
+                messageBody.toLowerCase().includes('verify') ||
+                messageBody.toLowerCase().includes('authenticate')) {
+              confidence += 0.05;
+            }
+            
+            // Length-based confidence (6-digit is most common)
+            if (code.length === 6) confidence += 0.05;
+            else if (code.length === 4 || code.length === 8) confidence += 0.03;
+            
+            const patternType = i < 2 ? `${platformType}_primary` : `${platformType}_fallback`;
+            
+            if (!bestMatch || confidence > bestMatch.confidence) {
+              bestMatch = {
+                code: code.toUpperCase(),
+                confidence: Math.min(confidence, 0.99), // Cap at 99%
+                type: codeType,
+                pattern: patternType
+              };
+            }
           }
-          
-          break;
         }
       }
 
-      if (!extractedCode) {
+      // If no good match found, return null
+      if (!bestMatch || bestMatch.confidence <= 0.6) {
         return null;
       }
 
-      // Store verification code
+      // Store verification code in database
       const codeExpiry = new Date();
       codeExpiry.setMinutes(codeExpiry.getMinutes() + 10); // 10 minute expiry
 
@@ -516,11 +631,11 @@ export class TwilioSMSClient {
         .values({
           sessionId: session?.id || null,
           messageId: smsMessage.id,
-          verificationCode: extractedCode,
-          codeType,
-          codeLength: extractedCode.length,
+          verificationCode: bestMatch.code,
+          codeType: bestMatch.type,
+          codeLength: bestMatch.code.length,
           isValid: true,
-          validationScore: confidence.toFixed(2),
+          validationScore: bestMatch.confidence.toFixed(2),
           platformType: session?.platformType || 'unknown',
           codeUsageType: session?.platformAction || 'unknown',
           codeStatus: 'active',
@@ -531,8 +646,8 @@ export class TwilioSMSClient {
 
       return {
         codeId: verificationCodeRecord[0].id,
-        verificationCode: extractedCode,
-        codeType,
+        verificationCode: bestMatch.code,
+        codeType: bestMatch.type,
         platformType: session?.platformType || 'unknown',
         extractedAt: new Date(),
         isValid: true,
@@ -671,5 +786,7 @@ export function createTwilioSMSClient(): TwilioSMSClient {
   return new TwilioSMSClient();
 }
 
-// Default instance export
-export const twilioSMSClient = createTwilioSMSClient();
+// Export factory function for on-demand creation
+export function createTwilioSMSClientInstance(): TwilioSMSClient {
+  return createTwilioSMSClient();
+}
