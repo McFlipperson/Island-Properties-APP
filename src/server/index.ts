@@ -2,16 +2,24 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import { config } from 'dotenv';
+import path from 'path';
 import { expertPersonasRouter } from './routes/expertPersonas';
 import { geoPlatformAccountsRouter } from './routes/geoPlatformAccounts';
 import { authorityContentRouter } from './routes/authorityContent';
 import { errorHandler } from './middleware/errorHandler';
 import { logger } from './services/logger';
+import { db, expertPersonas } from './db';
 
 config();
 
+// Fail fast if DATABASE_URL is not set
+if (!process.env.DATABASE_URL) {
+  logger.error('DATABASE_URL environment variable is required');
+  process.exit(1);
+}
+
 const app = express();
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || (process.env.NODE_ENV === 'production' ? 5000 : 3001);
 
 // Security and CORS middleware
 app.use(helmet());
@@ -35,14 +43,44 @@ app.use((req, res, next) => {
   next();
 });
 
-// Health check endpoint
-app.get('/health', (req, res) => {
-  res.json({ 
-    status: 'ok', 
-    timestamp: new Date().toISOString(),
-    service: 'geo-expert-authority-app'
-  });
+// Health check endpoint with database connectivity check
+app.get('/health', async (req, res) => {
+  try {
+    // Simple database connectivity check using existing table
+    await db.select().from(expertPersonas).limit(1);
+    
+    res.json({ 
+      status: 'ok', 
+      timestamp: new Date().toISOString(),
+      service: 'geo-expert-authority-app',
+      database: 'connected'
+    });
+  } catch (error) {
+    logger.error('Database health check failed:', error);
+    res.status(503).json({ 
+      status: 'error', 
+      timestamp: new Date().toISOString(),
+      service: 'geo-expert-authority-app',
+      database: 'disconnected',
+      error: 'Database connection failed'
+    });
+  }
 });
+
+// In production, serve static files from the built client
+if (process.env.NODE_ENV === 'production') {
+  const clientDistPath = path.join(__dirname, '..', 'client');
+  app.use(express.static(clientDistPath));
+  
+  // Handle client-side routing - serve index.html for non-API routes
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path.startsWith('/health')) {
+      next();
+    } else {
+      res.sendFile(path.join(clientDistPath, 'index.html'));
+    }
+  });
+}
 
 // API routes
 app.use('/api/expert-personas', expertPersonasRouter);
