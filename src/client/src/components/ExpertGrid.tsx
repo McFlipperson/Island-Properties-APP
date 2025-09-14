@@ -1,4 +1,5 @@
 import { ExpertPersona } from '../types/expert';
+import { ProxyAssignmentButton } from './ProxyAssignmentButton';
 
 interface ExpertGridProps {
   experts: ExpertPersona[];
@@ -121,6 +122,12 @@ export function ExpertGrid({ experts, onExpertAction, activeSessionId }: ExpertG
                 <span className="px-2 py-1 text-xs bg-linkedin-100 text-linkedin-700 rounded">LinkedIn</span>
               )}
             </div>
+          </div>
+
+          {/* Proxy Assignment */}
+          <div className="mb-4">
+            <div className="text-xs text-gray-500 mb-2">Manila Proxy Status:</div>
+            <ProxyAssignmentButton expert={expert} />
           </div>
 
           {/* Actions */}
