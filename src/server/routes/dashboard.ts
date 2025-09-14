@@ -4,6 +4,7 @@ import { db } from '../db/index';
 import { verificationCodes, expertPersonas, smsVerificationSessions } from '../../shared/schema';
 import { eq, and, desc } from 'drizzle-orm';
 import { logger } from '../services/logger';
+import { authenticateExpert, authorizeExpertAccess } from '../middleware/auth';
 
 const router = express.Router();
 
@@ -13,29 +14,25 @@ const activeConnections = new Map<string, Response>();
 /**
  * Server-Sent Events endpoint for real-time verification code delivery
  * Route: GET /api/dashboard/verification-codes/stream/:expertId
+ * SECURITY: Requires authentication via JWT token in query param for SSE compatibility
  */
-router.get('/verification-codes/stream/:expertId', async (req: Request, res: Response) => {
+router.get('/verification-codes/stream/:expertId', authenticateExpert, authorizeExpertAccess, async (req: Request, res: Response) => {
   const expertId = req.params.expertId;
   
   try {
-    // Verify expert exists
-    const expert = await db
-      .select({ id: expertPersonas.id, expertName: expertPersonas.expertName })
-      .from(expertPersonas)
-      .where(eq(expertPersonas.id, expertId))
-      .limit(1);
+    // Expert already verified by authentication middleware
+    // Use authenticated expert info from req.expertPersona
 
-    if (expert.length === 0) {
-      return res.status(404).json({ error: 'Expert not found' });
-    }
-
-    // Set SSE headers
+    // Set SSE headers with restricted CORS
     res.writeHead(200, {
       'Content-Type': 'text/event-stream',
       'Cache-Control': 'no-cache',
       'Connection': 'keep-alive',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Cache-Control'
+      'Access-Control-Allow-Origin': process.env.NODE_ENV === 'production' 
+        ? process.env.FRONTEND_URL || 'https://your-domain.com'
+        : 'http://localhost:3000',
+      'Access-Control-Allow-Headers': 'Cache-Control, Authorization',
+      'Access-Control-Allow-Credentials': 'true'
     });
 
     // Store connection for real-time updates
@@ -54,7 +51,7 @@ router.get('/verification-codes/stream/:expertId', async (req: Request, res: Res
 
     logger.info('🔗 Expert connected to verification code stream', {
       expertId: expertId.substring(0, 8) + '...',
-      expertName: expert[0].expertName
+      expertName: req.expertPersona?.expertName || 'Unknown'
     });
 
     // Handle client disconnect
@@ -222,7 +219,7 @@ export async function deliverVerificationCodeToExpert(
  * Get verification code history for expert dashboard
  * Route: GET /api/dashboard/verification-codes/:expertId
  */
-router.get('/verification-codes/:expertId', async (req: Request, res: Response) => {
+router.get('/verification-codes/:expertId', authenticateExpert, authorizeExpertAccess, async (req: Request, res: Response) => {
   const expertId = req.params.expertId;
   const limit = parseInt(req.query.limit as string) || 20;
   
@@ -272,13 +269,52 @@ router.get('/verification-codes/:expertId', async (req: Request, res: Response) 
 });
 
 /**
- * Mark verification code as viewed/used
+ * Mark verification code as viewed/used  
  * Route: POST /api/dashboard/verification-codes/:codeId/mark-used
+ * SECURITY: Requires authentication + ownership verification to prevent cross-expert manipulation
  */
-router.post('/verification-codes/:codeId/mark-used', async (req: Request, res: Response) => {
+router.post('/verification-codes/:codeId/mark-used', authenticateExpert, async (req: Request, res: Response) => {
   const codeId = req.params.codeId;
+  const authenticatedExpertId = req.expertId;
   
   try {
+    // Verify code ownership before allowing modification
+    const codeOwnership = await db
+      .select({ 
+        codeId: verificationCodes.id,
+        personaId: smsVerificationSessions.personaId 
+      })
+      .from(verificationCodes)
+      .innerJoin(
+        smsVerificationSessions,
+        eq(verificationCodes.sessionId, smsVerificationSessions.id)
+      )
+      .where(eq(verificationCodes.id, codeId))
+      .limit(1);
+
+    if (codeOwnership.length === 0) {
+      return res.status(404).json({
+        error: 'Verification code not found',
+        message: 'Code does not exist or has been deleted'
+      });
+    }
+
+    // Critical security check: Ensure expert can only modify their own codes
+    if (!authenticatedExpertId || codeOwnership[0].personaId !== authenticatedExpertId) {
+      logger.warn('❌ Unauthorized verification code access attempt', {
+        authenticatedExpert: authenticatedExpertId ? authenticatedExpertId.substring(0, 8) + '...' : 'unknown',
+        codeOwner: (codeOwnership[0].personaId ?? 'unknown').substring(0, 8) + '...',
+        codeId: codeId.substring(0, 8) + '...',
+        ip: req.ip
+      });
+      
+      return res.status(403).json({
+        error: 'Access denied',
+        message: 'Cannot modify verification codes belonging to other experts'
+      });
+    }
+
+    // Now safe to update the verification code
     await db
       .update(verificationCodes)
       .set({
