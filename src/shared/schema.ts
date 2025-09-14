@@ -225,6 +225,178 @@ export const proxyAssignments = pgTable('proxy_assignments', {
   updatedAt: timestamp('updated_at').defaultNow()
 });
 
+// Expert Phone Numbers Table (Twilio Integration)
+export const expertPhoneNumbers = pgTable('expert_phone_numbers', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  personaId: uuid('persona_id').references(() => expertPersonas.id, { onDelete: 'cascade' }),
+  
+  // Twilio Phone Configuration
+  twilioPhoneNumber: varchar('twilio_phone_number', { length: 20 }).notNull().unique(), // +63XXXXXXXXXX
+  twilioPhoneSid: varchar('twilio_phone_sid', { length: 255 }).notNull().unique(),
+  phoneNumberStatus: varchar('phone_number_status', { length: 20 }).default('provisioning'), // provisioning, active, suspended, failed
+  
+  // Phone Number Details
+  countryCode: varchar('country_code', { length: 3 }).default('PH'),
+  friendlyName: varchar('friendly_name', { length: 100 }),
+  phoneNumberType: varchar('phone_number_type', { length: 20 }), // local, mobile, toll-free
+  capabilities: jsonb('capabilities').notNull(), // voice, sms, mms capabilities
+  
+  // Expert Assignment
+  assignmentStatus: varchar('assignment_status', { length: 20 }).default('assigned'), // assigned, unassigned, reserved
+  assignedAt: timestamp('assigned_at').defaultNow(),
+  
+  // Cost Management
+  monthlyCostUsd: decimal('monthly_cost_usd', { precision: 6, scale: 2 }),
+  usageThisMonth: decimal('usage_this_month', { precision: 8, scale: 4 }).default('0.0000'),
+  
+  // Verification Configuration
+  webhookUrl: varchar('webhook_url', { length: 500 }),
+  verificationEnabled: boolean('verification_enabled').default(true),
+  
+  // Security & Encryption
+  encryptionKeyId: varchar('encryption_key_id', { length: 255 }),
+  
+  // Health Monitoring
+  lastHealthCheck: timestamp('last_health_check'),
+  healthStatus: varchar('health_status', { length: 20 }).default('unknown'), // healthy, degraded, failed, unknown
+  consecutiveFailures: integer('consecutive_failures').default(0),
+  
+  // Metadata
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+  lastActivity: timestamp('last_activity')
+});
+
+// SMS Verification Sessions Table
+export const smsVerificationSessions = pgTable('sms_verification_sessions', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  personaId: uuid('persona_id').references(() => expertPersonas.id, { onDelete: 'cascade' }),
+  phoneNumberId: uuid('phone_number_id').references(() => expertPhoneNumbers.id, { onDelete: 'cascade' }),
+  
+  // Platform Context
+  platformType: varchar('platform_type', { length: 50 }).notNull(), // medium, reddit, quora, facebook, linkedin
+  platformAction: varchar('platform_action', { length: 50 }).notNull(), // signup, login, phone_verification, 2fa_setup
+  
+  // Session Management
+  sessionStatus: varchar('session_status', { length: 20 }).default('active'), // active, completed, expired, failed
+  sessionStartedAt: timestamp('session_started_at').defaultNow(),
+  sessionExpiredAt: timestamp('session_expired_at'),
+  
+  // Expected Verification
+  expectedCodePattern: varchar('expected_code_pattern', { length: 50 }), // 4-digit, 6-digit, 8-digit, alphanumeric
+  maxRetries: integer('max_retries').default(3),
+  attemptsRemaining: integer('attempts_remaining').default(3),
+  
+  // Session Metadata
+  userAgent: text('user_agent'),
+  ipAddress: varchar('ip_address', { length: 45 }),
+  sessionNotes: text('session_notes'),
+  
+  // Metadata
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
+  completedAt: timestamp('completed_at')
+});
+
+// SMS Messages Table (Incoming Verification SMS)
+export const smsMessages = pgTable('sms_messages', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  sessionId: uuid('session_id').references(() => smsVerificationSessions.id, { onDelete: 'cascade' }),
+  phoneNumberId: uuid('phone_number_id').references(() => expertPhoneNumbers.id, { onDelete: 'cascade' }),
+  
+  // Twilio Message Details
+  twilioMessageSid: varchar('twilio_message_sid', { length: 255 }).notNull().unique(),
+  fromPhoneNumber: varchar('from_phone_number', { length: 20 }).notNull(),
+  toPhoneNumber: varchar('to_phone_number', { length: 20 }).notNull(),
+  
+  // Message Content
+  messageBody: text('message_body').notNull(),
+  messageDirection: varchar('message_direction', { length: 10 }).default('inbound'), // inbound, outbound
+  messageStatus: varchar('message_status', { length: 20 }), // received, delivered, failed, etc.
+  
+  // Verification Code Extraction
+  verificationCode: varchar('verification_code', { length: 20 }),
+  codeConfidence: decimal('code_confidence', { precision: 3, scale: 2 }), // 0.00-1.00 confidence score
+  codePattern: varchar('code_pattern', { length: 50 }), // detected pattern type
+  
+  // Platform Detection
+  detectedPlatform: varchar('detected_platform', { length: 50 }),
+  platformConfidence: decimal('platform_confidence', { precision: 3, scale: 2 }),
+  
+  // Processing Status
+  processingStatus: varchar('processing_status', { length: 20 }).default('pending'), // pending, processed, failed, ignored
+  processingNotes: text('processing_notes'),
+  deliveredToDashboard: boolean('delivered_to_dashboard').default(false),
+  
+  // Metadata
+  receivedAt: timestamp('received_at').defaultNow(),
+  processedAt: timestamp('processed_at'),
+  createdAt: timestamp('created_at').defaultNow()
+});
+
+// Verification Codes Table (Parsed and Validated Codes)
+export const verificationCodes = pgTable('verification_codes', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  sessionId: uuid('session_id').references(() => smsVerificationSessions.id, { onDelete: 'cascade' }),
+  messageId: uuid('message_id').references(() => smsMessages.id, { onDelete: 'cascade' }),
+  
+  // Code Details
+  verificationCode: varchar('verification_code', { length: 20 }).notNull(),
+  codeType: varchar('code_type', { length: 20 }).notNull(), // numeric, alphanumeric, mixed
+  codeLength: integer('code_length').notNull(),
+  
+  // Validation
+  isValid: boolean('is_valid').default(true),
+  validationScore: decimal('validation_score', { precision: 3, scale: 2 }),
+  
+  // Platform Context
+  platformType: varchar('platform_type', { length: 50 }).notNull(),
+  codeUsageType: varchar('code_usage_type', { length: 50 }), // phone_verification, 2fa, login, signup
+  
+  // Status Tracking
+  codeStatus: varchar('code_status', { length: 20 }).default('active'), // active, used, expired, invalid
+  usedAt: timestamp('used_at'),
+  expiresAt: timestamp('expires_at'),
+  
+  // Dashboard Delivery
+  sentToDashboard: boolean('sent_to_dashboard').default(false),
+  dashboardDeliveryAt: timestamp('dashboard_delivery_at'),
+  viewedByUser: boolean('viewed_by_user').default(false),
+  viewedAt: timestamp('viewed_at'),
+  
+  // Metadata
+  extractedAt: timestamp('extracted_at').defaultNow(),
+  createdAt: timestamp('created_at').defaultNow()
+});
+
+// SMS Webhook Events Table (Audit Trail)
+export const smsWebhookEvents = pgTable('sms_webhook_events', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  
+  // Webhook Details
+  webhookEventType: varchar('webhook_event_type', { length: 50 }).notNull(), // message_received, delivery_status, etc.
+  twilioEventSid: varchar('twilio_event_sid', { length: 255 }),
+  
+  // Request Details
+  requestBody: jsonb('request_body').notNull(),
+  requestHeaders: jsonb('request_headers'),
+  sourceIp: varchar('source_ip', { length: 45 }),
+  
+  // Processing Status
+  processingStatus: varchar('processing_status', { length: 20 }).default('pending'), // pending, processed, failed
+  processingError: text('processing_error'),
+  processingDuration: integer('processing_duration'), // milliseconds
+  
+  // Associated Records
+  messageId: uuid('message_id').references(() => smsMessages.id),
+  sessionId: uuid('session_id').references(() => smsVerificationSessions.id),
+  
+  // Metadata
+  receivedAt: timestamp('received_at').defaultNow(),
+  processedAt: timestamp('processed_at'),
+  createdAt: timestamp('created_at').defaultNow()
+});
+
 // Indexes
 export const expertPersonasNameIdx = index('idx_expert_personas_name').on(expertPersonas.expertName);
 export const expertPersonasStatusIdx = index('idx_expert_personas_status').on(expertPersonas.expertStatus);
@@ -237,6 +409,24 @@ export const contentPublicationsPersonaIdx = index('idx_content_publications_per
 export const contentPublicationsPlatformIdx = index('idx_content_publications_platform').on(authorityContentPublications.platformAccountId);
 
 export const proxyAssignmentsPersonaIdx = index('idx_proxy_assignments_persona').on(proxyAssignments.personaId);
+
+// Twilio SMS Indexes
+export const expertPhoneNumbersPersonaIdx = index('idx_expert_phone_numbers_persona').on(expertPhoneNumbers.personaId);
+export const expertPhoneNumbersStatusIdx = index('idx_expert_phone_numbers_status').on(expertPhoneNumbers.phoneNumberStatus);
+export const expertPhoneNumbersTwilioNumberIdx = index('idx_expert_phone_numbers_twilio').on(expertPhoneNumbers.twilioPhoneNumber);
+
+export const smsVerificationSessionsPersonaIdx = index('idx_sms_verification_sessions_persona').on(smsVerificationSessions.personaId);
+export const smsVerificationSessionsPhoneIdx = index('idx_sms_verification_sessions_phone').on(smsVerificationSessions.phoneNumberId);
+export const smsVerificationSessionsStatusIdx = index('idx_sms_verification_sessions_status').on(smsVerificationSessions.sessionStatus);
+
+export const smsMessagesSessionIdx = index('idx_sms_messages_session').on(smsMessages.sessionId);
+export const smsMessagesPhoneIdx = index('idx_sms_messages_phone').on(smsMessages.phoneNumberId);
+export const smsMessagesTwilioSidIdx = index('idx_sms_messages_twilio_sid').on(smsMessages.twilioMessageSid);
+
+export const verificationCodesSessionIdx = index('idx_verification_codes_session').on(verificationCodes.sessionId);
+export const verificationCodesStatusIdx = index('idx_verification_codes_status').on(verificationCodes.codeStatus);
+
+export const smsWebhookEventsTypeIdx = index('idx_sms_webhook_events_type').on(smsWebhookEvents.webhookEventType);
 
 // Zod schemas - will add later once drizzle-zod is properly configured
 // export const insertAdminUserSchema = createInsertSchema(adminUsers);
@@ -257,3 +447,18 @@ export type NewAuthorityContentPublication = typeof authorityContentPublications
 
 export type ProxyAssignment = typeof proxyAssignments.$inferSelect;
 export type NewProxyAssignment = typeof proxyAssignments.$inferInsert;
+
+export type ExpertPhoneNumber = typeof expertPhoneNumbers.$inferSelect;
+export type NewExpertPhoneNumber = typeof expertPhoneNumbers.$inferInsert;
+
+export type SmsVerificationSession = typeof smsVerificationSessions.$inferSelect;
+export type NewSmsVerificationSession = typeof smsVerificationSessions.$inferInsert;
+
+export type SmsMessage = typeof smsMessages.$inferSelect;
+export type NewSmsMessage = typeof smsMessages.$inferInsert;
+
+export type VerificationCode = typeof verificationCodes.$inferSelect;
+export type NewVerificationCode = typeof verificationCodes.$inferInsert;
+
+export type SmsWebhookEvent = typeof smsWebhookEvents.$inferSelect;
+export type NewSmsWebhookEvent = typeof smsWebhookEvents.$inferInsert;

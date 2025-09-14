@@ -1,0 +1,59 @@
+Build comprehensive Proxy-Cheap API integration with Twilio SMS automation for seamless expert platform authentication:
+
+1. Proxy-Cheap API Integration:
+   - Complete API client with authentication and rate limiting
+   - Core functions: create proxy, delete proxy, get status, test connection, usage stats, IP geolocation
+   - Philippines-specific endpoint configuration (Manila/Cebu residential IPs)
+   - Robust error handling for API failures, timeouts, and invalid responses
+   - Store credentials in Replit Secrets: PROXY_CHEAP_API_KEY, PROXY_CHEAP_BASE_URL
+
+2. Twilio SMS Integration:
+   - Twilio API client for Philippines phone number management
+   - Functions: provision PH numbers, receive SMS, parse verification codes
+   - One Philippines phone number per expert (5 numbers total)
+   - Store credentials in Replit Secrets: TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN
+   - SMS webhook endpoint for receiving verification codes
+
+3. Automated 2FA System:
+   - Real-time SMS monitoring for verification codes
+   - Auto-parse verification codes from platform SMS (4-8 digit patterns)
+   - Code delivery to expert dashboard in real-time
+   - SMS history and code management per expert
+   - Auto-retry logic for failed code deliveries
+
+4. Expert-Proxy-Phone Assignment:
+   - Database schema: proxy_cheap_id, proxy_ip, twilio_phone_number, sms_verification_status
+   - Complete expert setup: proxy assignment → phone provisioning → verification ready
+   - Status tracking: "unassigned", "provisioning", "ready", "verifying", "active", "failed"
+   - Integrated health monitoring for both proxy and phone services
+
+5. Platform Authentication Support:
+   - SMS code auto-capture for Medium, Reddit, Quora, Facebook, LinkedIn signups
+   - Real-time code display in expert management interface
+   - Verification code history and retry management
+   - Platform-specific SMS parsing (different formats per platform)
+
+6. Security & Data Protection:
+   - AES-256-GCM encryption for all credentials (proxy + Twilio)
+   - Secure SMS data storage with automatic cleanup
+   - Expert-specific phone number isolation
+   - Audit logging for all proxy and SMS operations
+
+7. Cost Management:
+   - Combined budget tracking: $6.35 proxies + $10-15 Twilio numbers = ~$16-21/month
+   - Real-time cost monitoring for both services
+   - Budget alerts and enforcement across services
+   - Usage optimization recommendations
+
+8. Integration Dashboard:
+   - Expert status showing: Proxy (Connected), Phone (Active), 2FA (Ready)
+   - Real-time SMS monitoring panel per expert
+   - One-click expert setup: assigns proxy + provisions phone + enables 2FA
+   - Platform authentication workflow integrated into expert switching
+
+CRITICAL REQUIREMENTS:
+- SMS codes must auto-appear in dashboard within seconds
+- All Philippines phone numbers must work with major platforms
+- Budget enforcement across both Proxy-Cheap and Twilio
+- Complete expert isolation for security and authenticity
+- Ready for manual platform account creation with automated verification

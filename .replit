@@ -1,6 +1,7 @@
-modules = ["bash", "nodejs-20", "postgresql-16"]
+modules = ["bash", "nodejs-20", "postgresql-16", "python-3.11"]
 [agent]
 expertMode = true
+integrations = ["twilio_send_message:1.0.0"]
 
 [nix]
 channel = "stable-25_05"
