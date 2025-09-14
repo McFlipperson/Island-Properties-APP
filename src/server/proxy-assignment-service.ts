@@ -2,7 +2,7 @@ import { db } from './db/index';
 import { proxyAssignments, expertPersonas } from '../shared/schema';
 import { ProxyCheapClient, createProxyCheapClient, ProxyDetails, ProxyTestResult } from './proxy-cheap-client';
 import { getEncryptionService, EncryptedData, DecryptedCredentials } from './encryption-service';
-import { eq, and, desc, count, sum } from 'drizzle-orm';
+import { eq, and, desc } from 'drizzle-orm';
 
 // Types for proxy assignment workflow
 export interface ProxyAssignmentRequest {

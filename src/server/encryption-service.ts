@@ -12,7 +12,6 @@ export interface EncryptedData {
   encryptedData: string; // Base64 encoded
   iv: string; // Base64 encoded
   tag: string; // Base64 encoded
-  salt: string; // Base64 encoded
   keyId: string; // Expert-specific key identifier
 }
 
@@ -53,18 +52,21 @@ class ExpertKeyManager {
   private masterKey: Buffer;
 
   constructor() {
-    // Initialize master key from environment or generate
+    // Initialize master key from environment - REQUIRED for production
     const masterKeyEnv = process.env.MASTER_ENCRYPTION_KEY;
-    if (masterKeyEnv) {
-      this.masterKey = Buffer.from(masterKeyEnv, 'base64');
-      if (this.masterKey.length !== KEY_LENGTH) {
-        throw new KeyManagementError('Invalid master key length');
-      }
-    } else {
-      // Generate and log warning - in production, this should come from secure storage
-      this.masterKey = crypto.randomBytes(KEY_LENGTH);
-      console.warn('⚠️  Master encryption key not found in environment. Generated temporary key.');
-      console.warn('   Set MASTER_ENCRYPTION_KEY for production use.');
+    if (!masterKeyEnv) {
+      throw new KeyManagementError(
+        'MASTER_ENCRYPTION_KEY environment variable is required. ' +
+        'Generate with: openssl rand -base64 32'
+      );
+    }
+    
+    this.masterKey = Buffer.from(masterKeyEnv, 'base64');
+    if (this.masterKey.length !== KEY_LENGTH) {
+      throw new KeyManagementError(
+        `Invalid master key length. Expected ${KEY_LENGTH} bytes, got ${this.masterKey.length}. ` +
+        'Generate with: openssl rand -base64 32'
+      );
     }
   }
 
@@ -94,15 +96,40 @@ class ExpertKeyManager {
   }
 
   /**
-   * Retrieve expert-specific encryption key
+   * Retrieve expert-specific encryption key (derive on-demand if not found)
    */
   getExpertKey(keyId: string): Buffer {
-    const key = this.keys.get(keyId);
+    let key = this.keys.get(keyId);
     if (!key) {
-      // Try to regenerate if possible (in production, retrieve from secure storage)
-      throw new KeyManagementError(`Expert encryption key not found: ${keyId}`);
+      // Derive key on-demand from keyId (handles cold starts)
+      const expertId = this.extractExpertIdFromKeyId(keyId);
+      if (!expertId) {
+        throw new KeyManagementError(`Invalid key ID format: ${keyId}`);
+      }
+      
+      // Regenerate the key using deterministic derivation
+      key = crypto.pbkdf2Sync(
+        this.masterKey,
+        Buffer.from(`expert_salt_${expertId}`, 'utf8'),
+        100000,
+        KEY_LENGTH,
+        'sha256'
+      );
+      
+      // Cache the derived key
+      this.keys.set(keyId, key);
     }
     return key;
+  }
+
+  /**
+   * Extract expertId from keyId for on-demand key derivation
+   */
+  private extractExpertIdFromKeyId(keyId: string): string | null {
+    if (!keyId.startsWith('expert_')) {
+      return null;
+    }
+    return keyId.substring(7); // Remove 'expert_' prefix
   }
 
   /**
@@ -123,7 +150,18 @@ class ExpertKeyManager {
    * Validate key ID format and accessibility
    */
   validateKeyId(keyId: string): boolean {
-    return this.keys.has(keyId) && keyId.startsWith('expert_');
+    // Validate format first
+    if (!keyId.startsWith('expert_')) {
+      return false;
+    }
+    
+    // Check if we can derive/access the key
+    try {
+      this.getExpertKey(keyId);
+      return true;
+    } catch {
+      return false;
+    }
   }
 
   /**
@@ -165,7 +203,6 @@ export class EncryptionService {
       // Prepare data for encryption
       const dataToEncrypt = JSON.stringify(credentials);
       const iv = crypto.randomBytes(IV_LENGTH);
-      const salt = crypto.randomBytes(SALT_LENGTH);
 
       // Create cipher with proper GCM implementation
       const cipher = crypto.createCipheriv(ALGORITHM, encryptionKey, iv);
@@ -181,7 +218,6 @@ export class EncryptionService {
         encryptedData: encrypted,
         iv: iv.toString('base64'),
         tag: tag.toString('base64'),
-        salt: salt.toString('base64'),
         keyId: currentKeyId
       };
 
