@@ -2,8 +2,7 @@ import { db } from './db/index';
 import { proxyAssignments, expertPersonas } from '../shared/schema';
 import { ProxyCheapClient, createProxyCheapClient, ProxyDetails, ProxyTestResult } from './proxy-cheap-client';
 import { getEncryptionService, EncryptedData, DecryptedCredentials } from './encryption-service';
-import { eq, and, desc } from 'drizzle-orm';
-import { count, sum } from 'drizzle-orm/sql';
+import { eq, and, desc, count, sum } from 'drizzle-orm';
 
 // Types for proxy assignment workflow
 export interface ProxyAssignmentRequest {
@@ -362,16 +361,16 @@ export class ProxyAssignmentService {
       );
     }
 
-    // Check proxy count limit
-    const currentProxyCount = await db
-      .select({ count: count() })
+    // Check proxy count limit  
+    const activeProxies = await db
+      .select()
       .from(proxyAssignments)
       .where(and(
         eq(proxyAssignments.personaId, expertId),
         eq(proxyAssignments.assignmentStatus, 'active')
       ));
 
-    if (currentProxyCount[0].count >= BUDGET_LIMITS.MAX_PROXIES_PER_EXPERT) {
+    if (activeProxies.length >= BUDGET_LIMITS.MAX_PROXIES_PER_EXPERT) {
       throw new ProxyAssignmentError(
         `Maximum of ${BUDGET_LIMITS.MAX_PROXIES_PER_EXPERT} proxies per expert exceeded`,
         'PROXY_LIMIT_EXCEEDED'
@@ -521,17 +520,17 @@ export class ProxyAssignmentService {
     percentUsed: number;
     canAssignMore: boolean;
   }> {
-    const result = await db
-      .select({
-        total: sum(proxyAssignments.monthlyCostUsd)
-      })
+    const activeAssignments = await db
+      .select()
       .from(proxyAssignments)
       .where(and(
         eq(proxyAssignments.personaId, expertId),
         eq(proxyAssignments.assignmentStatus, 'active')
       ));
 
-    const currentMonthlyCost = parseFloat(result[0].total?.toString() || '0');
+    const currentMonthlyCost = activeAssignments.reduce((total, assignment) => {
+      return total + parseFloat(assignment.monthlyCostUsd?.toString() || '0');
+    }, 0);
     const percentUsed = (currentMonthlyCost / BUDGET_LIMITS.MAX_MONTHLY_COST) * 100;
 
     return {

@@ -114,7 +114,7 @@ class CostCalculator {
       const dailyCost = parseFloat(assignment.dailyCostUsd?.toString() || '0');
       
       // Calculate prorated cost based on days active this month
-      const startDate = assignment.costTrackingStartDate || assignment.createdAt;
+      const startDate = assignment.costTrackingStartDate || assignment.createdAt || now;
       const daysActive = Math.ceil((now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
       const proratedCost = Math.min(dailyCost * daysActive, monthlyCost);
       

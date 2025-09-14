@@ -3,7 +3,7 @@ import crypto from 'crypto';
 // Encryption Configuration
 const ALGORITHM = 'aes-256-gcm';
 const KEY_LENGTH = 32; // 256 bits
-const IV_LENGTH = 16; // 128 bits
+const IV_LENGTH = 12; // 96 bits for GCM (12 bytes recommended)
 const TAG_LENGTH = 16; // 128 bits
 const SALT_LENGTH = 32; // 256 bits
 
@@ -69,23 +69,26 @@ class ExpertKeyManager {
   }
 
   /**
-   * Generate expert-specific encryption key
+   * Generate expert-specific encryption key using deterministic derivation
    */
   generateExpertKey(expertId: string): string {
-    const salt = crypto.randomBytes(SALT_LENGTH);
-    const keyId = `expert_${expertId}_${Date.now()}_${crypto.randomBytes(8).toString('hex')}`;
+    // Use deterministic key ID for persistence across restarts
+    const keyId = `expert_${expertId}`;
     
-    // Derive expert-specific key using PBKDF2
-    const expertKey = crypto.pbkdf2Sync(
-      this.masterKey,
-      Buffer.concat([Buffer.from(expertId, 'utf8'), salt]),
-      100000, // iterations
-      KEY_LENGTH,
-      'sha256'
-    );
+    // Only generate if not already exists
+    if (!this.keys.has(keyId)) {
+      // Derive expert-specific key using PBKDF2 (deterministic)
+      const expertKey = crypto.pbkdf2Sync(
+        this.masterKey,
+        Buffer.from(`expert_salt_${expertId}`, 'utf8'), // Deterministic salt
+        100000, // iterations
+        KEY_LENGTH,
+        'sha256'
+      );
 
-    // Store the key with metadata
-    this.keys.set(keyId, expertKey);
+      // Store the key
+      this.keys.set(keyId, expertKey);
+    }
     
     return keyId;
   }
@@ -164,9 +167,8 @@ export class EncryptionService {
       const iv = crypto.randomBytes(IV_LENGTH);
       const salt = crypto.randomBytes(SALT_LENGTH);
 
-      // Create cipher
-      const cipher = crypto.createCipher(ALGORITHM, encryptionKey);
-      cipher.setAutoPadding(true);
+      // Create cipher with proper GCM implementation
+      const cipher = crypto.createCipheriv(ALGORITHM, encryptionKey, iv);
 
       // Encrypt data
       let encrypted = cipher.update(dataToEncrypt, 'utf8', 'base64');
@@ -207,10 +209,9 @@ export class EncryptionService {
       const iv = Buffer.from(encryptedData.iv, 'base64');
       const tag = Buffer.from(encryptedData.tag, 'base64');
 
-      // Create decipher
-      const decipher = crypto.createDecipher(ALGORITHM, encryptionKey);
+      // Create decipher with proper GCM implementation
+      const decipher = crypto.createDecipheriv(ALGORITHM, encryptionKey, iv);
       decipher.setAuthTag(tag);
-      decipher.setAutoPadding(true);
 
       // Decrypt data
       let decrypted = decipher.update(encryptedData.encryptedData, 'base64', 'utf8');
