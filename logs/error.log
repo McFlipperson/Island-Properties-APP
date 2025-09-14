@@ -1,0 +1,5 @@
+{"assignmentId":"06cb28e4-57f3-4988-b2f2-a0acdecd5994","error":"Cannot read properties of undefined (reading 'name')","level":"error","message":"Proxy test process failed","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:07:28.988Z"}
+{"error":"Unsupported state or unable to authenticate data","level":"error","message":"Decryption failed","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:10:57.099Z"}
+{"error":"Unsupported state or unable to authenticate data","level":"error","message":"Decryption failed","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:10:57.147Z"}
+{"error":"Unsupported state or unable to authenticate data","level":"error","message":"Decryption failed","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:10:57.196Z"}
+{"error":"Unsupported state or unable to authenticate data","level":"error","message":"Decryption failed","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:10:57.250Z"}

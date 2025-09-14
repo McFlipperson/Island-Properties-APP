@@ -1,0 +1,374 @@
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:18:27.882Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:18:27.885Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:18:27.885Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:22:32.526Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:22:32.528Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:22:32.529Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /health","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:22:52.184Z","userAgent":"curl/8.14.1"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:24:31.396Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:24:31.400Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:24:31.400Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:24:40.759Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:24:40.761Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:24:40.762Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:24:44.289Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:24:44.291Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:24:44.291Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:25:00.276Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:25:00.278Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:25:00.279Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:25:14.113Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:25:14.118Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:25:14.119Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:25:19.258Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:25:19.262Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:25:19.262Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:40:05.416Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:40:05.419Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:40:05.419Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:40:28.869Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:40:28.872Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:40:28.872Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:40:56.616Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:40:56.619Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:40:56.620Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:48:37.137Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:48:37.140Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:48:37.140Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:49:46.450Z","userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:49:48.567Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:52:10.347Z","userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:52:14.377Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:54:07.352Z","userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:54:09.053Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:56:20.946Z","userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:56:25.264Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:57:30.760Z","userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T03:57:32.489Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:01:08.330Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:01:08.334Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:01:08.335Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:03:36.782Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:03:36.784Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:03:36.785Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:14:48.572Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:14:53.632Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:15:56.937Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:15:56.940Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:15:56.941Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:15:59.127Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:16:00.877Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:16:01.085Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:16:01.329Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:19:09.146Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:19:11.484Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:19:11.678Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:19:11.925Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:39:15.495Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:39:15.498Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:39:15.498Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:41:01.435Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:41:01.440Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:41:01.441Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:41:33.633Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:41:33.636Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:41:33.637Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:41:53.790Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:41:53.794Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:41:53.794Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:43:04.053Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:43:04.055Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:43:04.056Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:44:34.712Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:44:34.715Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:44:34.715Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:45:37.107Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:45:37.110Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:45:37.110Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:46:12.589Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:46:12.592Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:46:12.592Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:47:58.228Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:47:58.231Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:47:58.232Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:49:45.191Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:49:45.195Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:49:45.195Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:51:31.295Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:51:31.301Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:51:31.302Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:51:37.568Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:51:37.571Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:51:37.571Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:51:45.165Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:51:45.169Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:51:45.169Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:52:02.518Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:52:02.523Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:52:02.523Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:52:26.275Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:52:26.278Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:52:26.279Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:52:39.628Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:52:39.631Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:52:39.631Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:52:47.323Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:52:47.327Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:52:47.327Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:53:26.272Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:53:26.274Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:53:26.275Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:55:51.718Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:55:51.723Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:55:51.723Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:56:05.755Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:56:05.759Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T04:56:05.760Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T05:54:36.282Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T05:54:36.286Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T05:54:36.286Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:27:19.197Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:27:19.201Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:27:19.202Z"}
+{"ip":"::ffff:172.31.79.194","level":"info","message":"GET /","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:27:20.918Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"ip":"::ffff:172.31.79.194","level":"info","message":"GET /","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:32:30.414Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:56:08.704Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:56:08.710Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:56:08.711Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:56:34.325Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:56:34.336Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:56:34.337Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:58:17.250Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:58:17.253Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:58:17.253Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:58:38.778Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:58:38.781Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:58:38.782Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:59:06.499Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:59:06.510Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T07:59:06.512Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:00:48.603Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:00:48.607Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:00:48.607Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:01:21.437Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:01:21.441Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:01:21.441Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:01:51.538Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:01:51.542Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:01:51.543Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:06:31.143Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:06:31.146Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:06:31.147Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:07:22.352Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:07:22.356Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T08:07:22.357Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:15:29.152Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:15:29.157Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:15:29.157Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:15:50.436Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:15:50.440Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:15:50.441Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:19:28.082Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:19:28.086Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:19:28.087Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:21:04.555Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:21:04.562Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:21:04.563Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:22:28.962Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:22:28.967Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:22:28.968Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:24:08.356Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:24:08.358Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:24:08.359Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:26:49.275Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:26:49.278Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:26:49.278Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:27:29.397Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:27:29.399Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:27:29.400Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:28:33.430Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:28:33.434Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:28:33.435Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:28:49.222Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:28:49.225Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:28:49.226Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:29:43.756Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:29:43.759Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:29:43.759Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:30:06.319Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:30:06.334Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:30:06.335Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:31:49.992Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:31:49.994Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:31:49.994Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:32:26.386Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:32:26.390Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:32:26.392Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:33:09.850Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:33:09.854Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:33:09.855Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:33:45.802Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:33:45.806Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:33:45.807Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:35:34.550Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:35:34.555Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:35:34.556Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:39:23.576Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:39:23.579Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:39:23.579Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:41:15.681Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:41:15.684Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:41:15.685Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:42:28.874Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:42:28.877Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:42:28.878Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:46:27.580Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:46:27.585Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T09:46:27.585Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:04:12.125Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:04:12.129Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:04:12.130Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:24:34.738Z","userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:24:38.804Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:24:58.313Z","userAgent":"curl/8.14.1"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:25:00.023Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:25:13.642Z","userAgent":"curl/8.14.1"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:25:15.336Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:26:05.209Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:26:05.213Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:26:05.213Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:26:26.069Z","userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:26:27.794Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"POST /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:27:05.063Z","userAgent":"curl/8.14.1"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"POST /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:28:00.879Z","userAgent":"curl/8.14.1"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"POST /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:28:35.437Z","userAgent":"curl/8.14.1"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"POST /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:28:54.038Z","userAgent":"curl/8.14.1"}
+{"level":"info","message":"Created expert persona: Maria Santos (1b4c8c2e-b465-4aa8-8766-89c3497680f9)","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:28:58.128Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:29:32.586Z","userAgent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 1 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:29:34.323Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:29:34.923Z","userAgent":"curl/8.14.1"}
+{"level":"info","message":"Retrieved 1 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:29:35.169Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:37:26.103Z","userAgent":"curl/8.14.1"}
+{"level":"info","message":"Retrieved 1 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:37:28.165Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"DELETE /api/expert-personas/1b4c8c2e-b465-4aa8-8766-89c3497680f9","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:37:28.679Z","userAgent":"curl/8.14.1"}
+{"level":"info","message":"Deleted expert persona: 1b4c8c2e-b465-4aa8-8766-89c3497680f9","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:37:28.960Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:38:00.314Z","userAgent":"curl/8.14.1"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:38:02.028Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:39:31.572Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:39:31.577Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:39:31.577Z"}
+{"ip":"::ffff:172.31.74.34","level":"info","message":"GET /","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:39:32.567Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:52:33.938Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:52:33.941Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:52:33.942Z"}
+{"ip":"::ffff:172.31.74.34","level":"info","message":"GET /","service":"geo-expert-authority-app","timestamp":"2025-09-14T11:52:35.231Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:04:53.306Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:04:53.310Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:04:53.310Z"}
+{"ip":"::ffff:172.31.74.34","level":"info","message":"GET /","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:04:54.544Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:05:27.711Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:05:27.715Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:05:27.716Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:06:12.031Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:06:12.036Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:06:12.037Z"}
+{"ip":"::ffff:172.31.74.34","level":"info","message":"GET /","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:06:20.844Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:08:58.011Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:08:58.021Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:08:58.021Z"}
+{"ip":"::ffff:172.31.74.34","level":"info","message":"GET /","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:08:58.983Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:09:42.422Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:09:42.425Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:09:42.425Z"}
+{"ip":"::ffff:172.31.74.34","level":"info","message":"GET /","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:10:41.474Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:13:31.289Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:13:31.292Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:13:31.292Z"}
+{"ip":"::ffff:172.31.74.34","level":"info","message":"GET /","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:13:32.231Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:15:14.739Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:15:14.742Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:15:14.742Z"}
+{"ip":"::ffff:172.31.74.34","level":"info","message":"GET /","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:15:15.706Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:16:15.039Z","userAgent":"curl/8.14.1"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:16:17.632Z","userAgent":"curl/8.14.1"}
+{"level":"info","message":"Retrieved 0 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:16:17.874Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"POST /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:16:51.720Z","userAgent":"curl/8.14.1"}
+{"level":"info","message":"Created expert persona: Test Expert (5c8ec1ce-c36c-4c58-bb77-85330ce0b1ec)","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:16:53.439Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:49:16.691Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:49:16.699Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:49:16.699Z"}
+{"ip":"::ffff:172.31.74.34","level":"info","message":"GET /","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:49:17.936Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:50:15.506Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:50:15.510Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:50:15.510Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:50:27.092Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:50:27.095Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:50:27.095Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:51:01.822Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:51:01.824Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:51:01.825Z"}
+{"ip":"::ffff:172.31.74.34","level":"info","message":"GET /","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:51:02.845Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:51:14.020Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:51:14.023Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:51:14.024Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:51:26.112Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:51:26.115Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:51:26.116Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:51:48.303Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:51:48.307Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:51:48.307Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"POST /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:52:10.823Z","userAgent":"curl/8.14.1"}
+{"level":"info","message":"Created expert persona: Manila Property Expert (fea34c7b-f4f4-43d7-ae76-bda7e9a17302)","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:52:12.929Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"POST /api/proxy-assignments/assign","service":"geo-expert-authority-app","timestamp":"2025-09-14T12:52:27.783Z","userAgent":"curl/8.14.1"}
+{"ip":"::ffff:172.31.74.34","level":"info","message":"GET /","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:00:19.609Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"ip":"::ffff:172.31.74.34","level":"info","message":"GET /","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:06:02.136Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:06:17.417Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:06:17.422Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:06:17.422Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:07:04.806Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:07:04.811Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:07:04.812Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"POST /api/proxy-assignments/assign","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:07:25.673Z","userAgent":"curl/8.14.1"}
+{"assignmentId":"06cb28e4-57f3-4988-b2f2-a0acdecd5994","expertId":"fea34c7b-f4f4-43d7-ae76-bda7e9a17302","expertName":"Manila Property Expert","level":"info","message":"Created proxy assignment for expert","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:07:28.404Z"}
+{"assignmentId":"06cb28e4-57f3-4988-b2f2-a0acdecd5994","level":"info","message":"Starting proxy health test","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:07:28.426Z"}
+{"host":"95.135.113.91","level":"info","message":"Testing proxy connection","port":"46137","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:07:28.428Z","username":"MkkW***"}
+{"city":"Manila","country":"Philippines","isPhilippines":true,"level":"info","message":"Proxy geo verification","region":"Metro Manila","responseTime":558,"service":"geo-expert-authority-app","timestamp":"2025-09-14T13:07:28.985Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:09:55.701Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:09:55.704Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:09:55.704Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/proxy-assignments/expert/fea34c7b-f4f4-43d7-ae76-bda7e9a17302","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:10:27.486Z","userAgent":"curl/8.14.1"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"POST /api/proxy-assignments/06cb28e4-57f3-4988-b2f2-a0acdecd5994/test","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:10:55.326Z","userAgent":"curl/8.14.1"}
+{"error":"Unsupported state or unable to authenticate data","level":"error","message":"Decryption failed","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:10:57.099Z"}
+{"error":"Unsupported state or unable to authenticate data","level":"error","message":"Decryption failed","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:10:57.147Z"}
+{"error":"Unsupported state or unable to authenticate data","level":"error","message":"Decryption failed","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:10:57.196Z"}
+{"error":"Unsupported state or unable to authenticate data","level":"error","message":"Decryption failed","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:10:57.250Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:17:41.399Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:17:41.402Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:17:41.402Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:18:03.662Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:18:03.667Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:18:03.668Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:21:14.862Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:21:14.867Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:21:14.867Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:23:48.830Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:23:48.834Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:23:48.834Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:25:17.781Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:25:17.785Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:25:17.786Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:50:49.119Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 2 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:50:51.292Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:50:51.441Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 2 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:50:51.680Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:51:19.407Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 2 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:51:21.104Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:51:21.261Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 2 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:51:21.502Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:56:33.105Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 2 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:56:35.272Z"}
+{"ip":"::ffff:127.0.0.1","level":"info","message":"GET /api/expert-personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:56:35.455Z","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36"}
+{"level":"info","message":"Retrieved 2 expert personas","service":"geo-expert-authority-app","timestamp":"2025-09-14T13:56:35.695Z"}
+{"level":"info","message":"🚀 Server running on port 3001","service":"geo-expert-authority-app","timestamp":"2025-09-14T22:04:37.896Z"}
+{"level":"info","message":"📊 Health check available at http://localhost:3001/health","service":"geo-expert-authority-app","timestamp":"2025-09-14T22:04:37.901Z"}
+{"level":"info","message":"🏗️  API endpoints available at http://localhost:3001/api","service":"geo-expert-authority-app","timestamp":"2025-09-14T22:04:37.901Z"}
