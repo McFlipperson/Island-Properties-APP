@@ -103,14 +103,26 @@ export function ProxyAssignmentButton({ expert, onStatusChange }: ProxyAssignmen
       pollCount++;
 
       try {
-        await loadProxyStatus();
+        // Load current status and check if we should continue polling
+        const response = await fetch(`/api/proxy-assignments/expert/${expert.id}`);
+        const data = await response.json();
         
-        // Continue polling if still in testing status
-        if (proxyStatus?.assignmentStatus === 'testing') {
-          setTimeout(poll, 5000);
+        if (data.success && data.data) {
+          setProxyStatus(data.data);
+          onStatusChange?.(expert.id, data.data);
+          
+          // Continue polling if still in testing status
+          if (data.data.assignmentStatus === 'testing') {
+            setTimeout(poll, 5000);
+          }
+        } else {
+          // No assignment found or error - stop polling
+          setProxyStatus(null);
+          onStatusChange?.(expert.id, null);
         }
       } catch (err) {
         console.error('Status polling error:', err);
+        // Don't continue polling on errors
       }
     };
 

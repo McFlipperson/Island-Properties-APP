@@ -5,6 +5,8 @@ import { eq, and } from 'drizzle-orm';
 import { z } from 'zod';
 import { logger } from '../services/logger';
 import crypto from 'crypto';
+import axios from 'axios';
+import { HttpProxyAgent } from 'http-proxy-agent';
 
 const router = Router();
 
@@ -30,18 +32,20 @@ const testProxySchema = z.object({
   password: z.string()
 });
 
-// Encryption utility functions
+// Secure encryption utility functions
 function encrypt(text: string): string {
   const algorithm = 'aes-256-gcm';
   const key = process.env.MASTER_ENCRYPTION_KEY || 'default-key-for-dev-only-change-in-production';
   const keyBuffer = crypto.scryptSync(key, 'salt', 32);
   const iv = crypto.randomBytes(16);
-  const cipher = crypto.createCipher(algorithm, keyBuffer);
+  const cipher = crypto.createCipheriv(algorithm, keyBuffer, iv);
   
   let encrypted = cipher.update(text, 'utf8', 'hex');
   encrypted += cipher.final('hex');
   
-  return iv.toString('hex') + ':' + encrypted;
+  const authTag = cipher.getAuthTag();
+  
+  return iv.toString('hex') + ':' + authTag.toString('hex') + ':' + encrypted;
 }
 
 function decrypt(encryptedText: string): string {
@@ -50,9 +54,17 @@ function decrypt(encryptedText: string): string {
     const key = process.env.MASTER_ENCRYPTION_KEY || 'default-key-for-dev-only-change-in-production';
     const keyBuffer = crypto.scryptSync(key, 'salt', 32);
     const textParts = encryptedText.split(':');
-    const iv = Buffer.from(textParts.shift()!, 'hex');
-    const encryptedData = textParts.join(':');
-    const decipher = crypto.createDecipher(algorithm, keyBuffer);
+    
+    if (textParts.length !== 3) {
+      throw new Error('Invalid encrypted text format');
+    }
+    
+    const iv = Buffer.from(textParts[0], 'hex');
+    const authTag = Buffer.from(textParts[1], 'hex');
+    const encryptedData = textParts[2];
+    
+    const decipher = crypto.createDecipheriv(algorithm, keyBuffer, iv);
+    decipher.setAuthTag(authTag);
     
     let decrypted = decipher.update(encryptedData, 'hex', 'utf8');
     decrypted += decipher.final('utf8');
@@ -64,89 +76,125 @@ function decrypt(encryptedText: string): string {
   }
 }
 
-// Test proxy connection with curl
+// Interface for geo API response
+interface GeoResponse {
+  status: string;
+  message?: string;
+  country: string;
+  countryCode: string;
+  region: string;
+  regionName: string;
+  city: string;
+  lat: number;
+  lon: number;
+  timezone: string;
+  query: string;
+}
+
+// Secure proxy connection test using axios with HttpProxyAgent
 async function testProxyConnection(host: string, port: string, username: string, password: string): Promise<{
   success: boolean;
   responseTime: number;
   geoData?: any;
   error?: string;
 }> {
-  const { exec } = require('child_process');
-  const util = require('util');
-  const execPromise = util.promisify(exec);
-  
   const startTime = Date.now();
   
   try {
-    // Test proxy connection with geo IP lookup
-    const curlCommand = `timeout 30 curl -s --proxy http://${username}:${password}@${host}:${port} --max-time 25 "http://ip-api.com/json/?fields=status,message,country,countryCode,region,regionName,city,lat,lon,timezone,query"`;
-    
     logger.info('Testing proxy connection', { host, port, username: username.substring(0, 4) + '***' });
     
-    const { stdout, stderr } = await execPromise(curlCommand);
+    // Create proxy agent with authentication
+    const proxyUrl = `http://${encodeURIComponent(username)}:${encodeURIComponent(password)}@${host}:${port}`;
+    const proxyAgent = new HttpProxyAgent(proxyUrl);
+    
+    // Test proxy connection with geo IP lookup using axios instance with proxy agent
+    const axiosInstance = axios.create({
+      timeout: 25000,
+      httpAgent: proxyAgent,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+      }
+    } as any);
+    
+    const response = await axiosInstance.get<GeoResponse>('http://ip-api.com/json/', {
+      params: {
+        fields: 'status,message,country,countryCode,region,regionName,city,lat,lon,timezone,query'
+      }
+    });
+    
     const responseTime = Date.now() - startTime;
     
-    if (stderr) {
-      logger.warn('Proxy test stderr', { stderr });
-    }
-    
-    if (!stdout) {
+    if (!response.data) {
       return {
         success: false,
         responseTime,
-        error: 'No response from proxy'
+        error: 'No response data from geo service'
       };
     }
     
-    try {
-      const geoData = JSON.parse(stdout);
+    const geoData = response.data;
+    
+    if (geoData.status === 'success') {
+      const isPhilippines = geoData.countryCode === 'PH';
       
-      if (geoData.status === 'success') {
-        const isPhilippines = geoData.countryCode === 'PH';
-        
-        logger.info('Proxy geo verification', {
+      logger.info('Proxy geo verification', {
+        country: geoData.country,
+        region: geoData.regionName,
+        city: geoData.city,
+        isPhilippines,
+        responseTime
+      });
+      
+      return {
+        success: true,
+        responseTime,
+        geoData: {
           country: geoData.country,
+          countryCode: geoData.countryCode,
           region: geoData.regionName,
           city: geoData.city,
-          isPhilippines,
-          responseTime
-        });
-        
-        return {
-          success: true,
-          responseTime,
-          geoData: {
-            country: geoData.country,
-            countryCode: geoData.countryCode,
-            region: geoData.regionName,
-            city: geoData.city,
-            ip: geoData.query,
-            isPhilippines
-          }
-        };
-      } else {
-        return {
-          success: false,
-          responseTime,
-          error: geoData.message || 'Geo lookup failed'
-        };
-      }
-    } catch (parseError) {
-      logger.error('Failed to parse geo response', { stdout, parseError: (parseError as Error).message });
+          ip: geoData.query,
+          isPhilippines
+        }
+      };
+    } else {
       return {
         success: false,
         responseTime,
-        error: 'Invalid geo response format'
+        error: geoData.message || 'Geo lookup failed'
       };
     }
-  } catch (error) {
+  } catch (error: unknown) {
     const responseTime = Date.now() - startTime;
-    logger.error('Proxy test failed', { error: (error as Error).message, responseTime });
+    let errorMessage = 'Unknown error';
+    
+    if (error instanceof Error) {
+      errorMessage = error.message;
+      
+      // Check for specific error codes
+      const anyError = error as any;
+      if (anyError.code === 'ECONNABORTED') {
+        errorMessage = 'Connection timeout';
+      } else if (anyError.code === 'ECONNREFUSED') {
+        errorMessage = 'Connection refused by proxy';
+      } else if (anyError.response) {
+        errorMessage = `HTTP ${anyError.response.status}: ${anyError.response.statusText}`;
+      } else if (anyError.request && !anyError.response) {
+        errorMessage = 'No response received from proxy';
+      }
+    }
+    
+    logger.error('Proxy test failed', { 
+      error: errorMessage, 
+      responseTime,
+      host,
+      port
+    });
     
     return {
       success: false,
       responseTime,
-      error: (error as Error).message
+      error: errorMessage
     };
   }
 }
@@ -329,8 +377,8 @@ router.post('/assign', async (req: Request, res: Response) => {
           MANILA_PROXY.password
         );
 
-        // Update assignment based on test result
-        if (testResult.success) {
+        // Update assignment based on test result AND location verification
+        if (testResult.success && testResult.geoData?.isPhilippines === true) {
           await db
             .update(proxyAssignments)
             .set({
@@ -338,10 +386,10 @@ router.post('/assign', async (req: Request, res: Response) => {
               proxyStatus: 'active',
               healthCheckStatus: 'healthy',
               lastHealthCheck: new Date(),
-              detectedCountry: testResult.geoData?.countryCode || null,
-              detectedCity: testResult.geoData?.city || null,
-              detectedRegion: testResult.geoData?.region || null,
-              isPhilippinesVerified: testResult.geoData?.isPhilippines || false,
+              detectedCountry: testResult.geoData.countryCode,
+              detectedCity: testResult.geoData.city,
+              detectedRegion: testResult.geoData.region,
+              isPhilippinesVerified: true,
               averageResponseTime: testResult.responseTime,
               connectionSuccessRate: '100.00',
               consecutiveFailures: 0,
@@ -350,13 +398,21 @@ router.post('/assign', async (req: Request, res: Response) => {
             })
             .where(eq(proxyAssignments.id, newAssignment.id));
 
-          logger.info('Proxy test successful - assignment activated', {
+          logger.info('Proxy test successful and Philippines location verified - assignment activated', {
             assignmentId: newAssignment.id,
             responseTime: testResult.responseTime,
-            location: `${testResult.geoData?.city}, ${testResult.geoData?.country}`,
-            isPhilippines: testResult.geoData?.isPhilippines
+            location: `${testResult.geoData.city}, ${testResult.geoData.country}`,
+            isPhilippines: testResult.geoData.isPhilippines
           });
         } else {
+          // Determine failure reason
+          let failureReason = 'Connection test failed';
+          if (testResult.success && testResult.geoData?.isPhilippines === false) {
+            failureReason = `Location verification failed: detected ${testResult.geoData.country} instead of Philippines`;
+          } else if (testResult.error) {
+            failureReason = testResult.error;
+          }
+          
           await db
             .update(proxyAssignments)
             .set({
@@ -364,16 +420,22 @@ router.post('/assign', async (req: Request, res: Response) => {
               proxyStatus: 'failed',
               healthCheckStatus: 'failed',
               lastHealthCheck: new Date(),
-              statusChangeReason: testResult.error || 'Connection test failed',
+              detectedCountry: testResult.geoData?.countryCode || null,
+              detectedCity: testResult.geoData?.city || null,
+              detectedRegion: testResult.geoData?.region || null,
+              isPhilippinesVerified: testResult.geoData?.isPhilippines || false,
+              statusChangeReason: failureReason,
               consecutiveFailures: 1,
               updatedAt: new Date()
             })
             .where(eq(proxyAssignments.id, newAssignment.id));
 
-          logger.error('Proxy test failed - assignment marked as failed', {
+          logger.error('Proxy assignment failed', {
             assignmentId: newAssignment.id,
-            error: testResult.error,
-            responseTime: testResult.responseTime
+            reason: failureReason,
+            responseTime: testResult.responseTime,
+            detectedLocation: testResult.geoData ? `${testResult.geoData.city}, ${testResult.geoData.country}` : 'unknown',
+            isPhilippines: testResult.geoData?.isPhilippines
           });
         }
       } catch (testError) {
@@ -473,18 +535,18 @@ router.post('/:id/test', async (req: Request, res: Response) => {
     // Perform test
     const testResult = await testProxyConnection(host, port, username, password);
 
-    // Update assignment based on test result
-    if (testResult.success) {
+    // Update assignment based on test result AND location verification
+    if (testResult.success && testResult.geoData?.isPhilippines === true) {
       await db
         .update(proxyAssignments)
         .set({
           assignmentStatus: 'active',
           proxyStatus: 'active',
           healthCheckStatus: 'healthy',
-          detectedCountry: testResult.geoData?.countryCode || null,
-          detectedCity: testResult.geoData?.city || null,
-          detectedRegion: testResult.geoData?.region || null,
-          isPhilippinesVerified: testResult.geoData?.isPhilippines || false,
+          detectedCountry: testResult.geoData.countryCode,
+          detectedCity: testResult.geoData.city,
+          detectedRegion: testResult.geoData.region,
+          isPhilippinesVerified: true,
           averageResponseTime: testResult.responseTime,
           connectionSuccessRate: '100.00',
           consecutiveFailures: 0,
@@ -493,13 +555,25 @@ router.post('/:id/test', async (req: Request, res: Response) => {
         })
         .where(eq(proxyAssignments.id, id));
     } else {
+      // Determine failure reason
+      let failureReason = 'Connection test failed';
+      if (testResult.success && testResult.geoData?.isPhilippines === false) {
+        failureReason = `Location verification failed: detected ${testResult.geoData.country} instead of Philippines`;
+      } else if (testResult.error) {
+        failureReason = testResult.error;
+      }
+      
       await db
         .update(proxyAssignments)
         .set({
           assignmentStatus: 'failed',
           proxyStatus: 'failed',
           healthCheckStatus: 'failed',
-          statusChangeReason: testResult.error || 'Connection test failed',
+          detectedCountry: testResult.geoData?.countryCode || null,
+          detectedCity: testResult.geoData?.city || null,
+          detectedRegion: testResult.geoData?.region || null,
+          isPhilippinesVerified: testResult.geoData?.isPhilippines || false,
+          statusChangeReason: failureReason,
           consecutiveFailures: (assignmentData.consecutiveFailures || 0) + 1,
           lastHealthCheck: new Date(),
           updatedAt: new Date()
