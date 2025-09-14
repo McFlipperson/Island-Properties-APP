@@ -15,6 +15,7 @@ export default defineConfig({
   server: {
     host: '0.0.0.0',
     port: 5000,
+    allowedHosts: ['eb792006-89d8-4fe1-9b36-b543288e264f-00-3tiqrevepzk57.sisko.replit.dev'],
     proxy: {
       '/api': {
         target: 'http://localhost:3001',
