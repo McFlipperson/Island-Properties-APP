@@ -111,6 +111,7 @@ export interface ExpertPersonaFormData {
   platformExpertiseFocus: PlatformExpertiseFocus;
   contentPublicationSchedule: ContentPublicationSchedule;
   expertVoiceCharacteristics: ExpertVoiceCharacteristics;
+  browserFingerprintConfig: BrowserFingerprintConfig;
 }
 
 // Philippines Real Estate Specializations

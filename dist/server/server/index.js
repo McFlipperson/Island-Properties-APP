@@ -11,7 +11,10 @@ const path_1 = __importDefault(require("path"));
 const expertPersonas_1 = require("./routes/expertPersonas");
 const geoPlatformAccounts_1 = require("./routes/geoPlatformAccounts");
 const authorityContent_1 = require("./routes/authorityContent");
+const webhooks_1 = require("./routes/webhooks");
+const dashboard_1 = require("./routes/dashboard");
 const errorHandler_1 = require("./middleware/errorHandler");
+const twilioSignatureValidation_1 = require("./middleware/twilioSignatureValidation");
 const logger_1 = require("./services/logger");
 const db_1 = require("./db");
 (0, dotenv_1.config)();
@@ -27,9 +30,11 @@ app.use((0, helmet_1.default)());
 app.use((0, cors_1.default)({
     origin: process.env.NODE_ENV === 'production'
         ? process.env.FRONTEND_URL || 'https://your-domain.com'
-        : ['http://localhost:3000', 'http://0.0.0.0:3000', 'http://127.0.0.1:3000'],
+        : ['http://localhost:5000', 'http://0.0.0.0:5000', 'http://127.0.0.1:5000', 'http://localhost:3000', 'http://0.0.0.0:3000', 'http://127.0.0.1:3000'],
     credentials: true
 }));
+// Raw body capture for webhook signature validation (must be before express.json)
+app.use('/api/webhooks', twilioSignatureValidation_1.captureRawBody);
 // Body parsing middleware
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
@@ -82,6 +87,8 @@ if (process.env.NODE_ENV === 'production') {
 app.use('/api/expert-personas', expertPersonas_1.expertPersonasRouter);
 app.use('/api/geo-platform-accounts', geoPlatformAccounts_1.geoPlatformAccountsRouter);
 app.use('/api/authority-content', authorityContent_1.authorityContentRouter);
+app.use('/api/webhooks', webhooks_1.webhooksRouter);
+app.use('/api/dashboard', dashboard_1.dashboardRouter);
 // Error handling
 app.use(errorHandler_1.errorHandler);
 // 404 handler
