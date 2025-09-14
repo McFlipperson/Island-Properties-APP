@@ -12,7 +12,10 @@
     "build:client": "cd src/client && npm run build",
     "start": "node dist/server/index.js",
     "test": "jest",
-    "lint": "eslint src --ext .ts,.tsx"
+    "lint": "eslint src --ext .ts,.tsx",
+    "db:generate": "drizzle-kit generate:pg",
+    "db:push": "drizzle-kit push:pg",
+    "db:studio": "drizzle-kit studio"
   },
   "keywords": ["real-estate", "expert-authority", "lead-generation", "philippines", "geo-optimization"],
   "author": "Island Properties Expert System",
